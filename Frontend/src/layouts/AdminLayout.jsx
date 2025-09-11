@@ -7,6 +7,12 @@ import Groups from "../pages/admin/Groups";
 import Settings from "../pages/admin/Settings";
 import ViewTask from "../pages/admin/Components/ViewTask";
 import EditGroup from "../pages/admin/Components/EditGroup";
+import Users from "../pages/admin/Users";
+import Tasks from "../pages/admin/Tasks";
+import Group from "../pages/admin/Group";
+import ViewSupports from "../pages/admin/ViewSupports";
+import Supports from "../pages/admin/Supports";
+import ViewGroup from "../pages/admin/ViewGroup";
 
 export default function AdminLayout() {
   return (
@@ -16,9 +22,15 @@ export default function AdminLayout() {
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="task" element={<Task />} />
+          <Route path="tasks" element={<Tasks/>} />
           <Route path="groups" element={<Groups />} />
+          <Route path="group" element={<Group />} />
+          <Route path="supports" element={<Supports />} />
+          <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
           <Route path="tasks/:id" element={<ViewTask />} />
+          <Route path="viewgroup/:id" element={<ViewGroup />} />
+          <Route path="supports/:id" element={<ViewSupports />} />
           <Route path="editgroup/:id" element={<EditGroup />} />
 
           <Route path="*" element={<Navigate to="dashboard" replace />} />

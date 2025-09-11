@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEdit, FaTrash } from "react-icons/fa"; // icons
 
-export default function AllGroups({ limit }) {
-  const [limit2, setLimit] = useState(limit);
-
+export default function AllGroups({ limit, moreButton, width }) {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -15,7 +14,9 @@ export default function AllGroups({ limit }) {
   const fetchGroups = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/groups");
+      const res = await fetch(
+        `http://localhost:5000/api/groups?limit=${limit}`
+      );
       const data = await res.json();
       setGroups(data);
     } catch (err) {
@@ -49,78 +50,96 @@ export default function AllGroups({ limit }) {
   };
 
   return (
-    <div className="mx-6 my-4 rounded-lg overflow-hidden bg-gray-900 text-white border border-gray-700">
-      {/* Dropdown Header */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
-      >
-        <h1 className="text-xl font-bold">All Groups</h1>
-        <span>{isOpen ? "▲" : "▼"}</span>
-      </button>
+    <section
+      className={
+        width === "half" ? "w-1/2 pb-6 px-2 lg:w-full" : "w-full pb-6 px-2"
+      }
+    >
+      <div className="w-full rounded-lg overflow-hidden bg-gray-900 text-white border border-gray-700">
+        {/* Dropdown Header */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
+        >
+          <h1 className="text-xl font-bold max-[500px]:text-lg">
+            All Groups
+          </h1>
+          <span className="max-[500px]:text-sm">{isOpen ? "▲" : "▼"}</span>
+        </button>
 
-      {isOpen && (
-        <div className="p-6">
-          {loading ? (
-            <p className="text-center">Loading groups...</p>
-          ) : error ? (
-            <p className="text-center text-red-500">{error}</p>
-          ) : groups.length === 0 ? (
-            <p className="text-center text-gray-400">No groups found.</p>
-          ) : (
-            <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
-              <thead className="bg-gray-800">
-                <tr>
-                  <th className="p-3 text-left">Title</th>
-                  <th className="p-3 text-left">Description</th>
-                  <th className="p-3 text-center">Members</th>
-                  <th className="p-3 text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {groups.splice(0, limit).map((group) => (
-                  <tr key={group._id} className="border-t border-gray-700">
-                    <td className="p-3">{group.title}</td>
-                    <td className="p-3 text-gray-300">
-                      {group.description || "-"}
-                    </td>
-                    <td className="p-3 text-center">
-                      {group.members?.length || 0}
-                    </td>
-                    <td className="p-3 flex gap-2 justify-center">
-                      <button
-                        onClick={() =>
-                          navigate(`/admin/editgroup/${group._id}`)
-                        }
-                        className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
-                      >
-                        View/Edit
-                      </button>
-                      <button
-                        onClick={() => deleteGroup(group._id)}
-                        className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
-                      >
-                        Delete
-                      </button>
-                    </td>
+        {isOpen && (
+          <div className="p-6 max-[500px]:p-3">
+            {loading ? (
+              <p className="text-center max-[500px]:text-sm">Loading groups...</p>
+            ) : error ? (
+              <p className="text-center text-red-500 max-[500px]:text-sm">
+                {error}
+              </p>
+            ) : groups.length === 0 ? (
+              <p className="text-center text-gray-400 max-[500px]:text-sm">
+                No groups found.
+              </p>
+            ) : (
+              <table className="w-full border border-gray-700 rounded-lg overflow-hidden text-base max-[500px]:text-sm">
+                <thead className="bg-gray-800">
+                  <tr>
+                    <th className="p-3 text-left">Title</th>
+                    <th className="p-3 text-center">Members</th>
+                    <th className="p-3 text-center">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                </thead>
+                <tbody>
+                  {groups.map((group) => {
+                    const showIcons = window.innerWidth <= 1000;
+                    return (
+                      <tr
+                        key={group._id}
+                        className="border-t border-gray-700"
+                      >
+                        <td className="p-3 cursor-pointer hover:bg-blue-600"  onClick={()=> navigate("/portal/admin/viewgroup/"+group._id)}>{group.title}</td>
+                        <td className="p-3 text-center">
+                          {group.members?.length || 0}
+                        </td>
+                        <td className="p-3 flex gap-2 justify-center">
+                          <button
+                            onClick={() =>
+                              navigate(`/portal/admin/editgroup/${group._id}`)
+                            }
+                            className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
+                          >
+                            {showIcons ? <FaEdit /> : "View/Edit"}
+                          </button>
+                          <button
+                            onClick={() => deleteGroup(group._id)}
+                            className="bg-red-600 px-3 py-1 rounded hover:bg-red-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
+                          >
+                            {showIcons ? <FaTrash /> : "Delete"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
 
-          {groups.length > limit2 && (
-            <div className="flex justify-center mt-6">
+            <div
+              className={
+                moreButton
+                  ? "flex justify-center mt-6"
+                  : "flex justify-center mt-6 hidden"
+              }
+            >
               <button
-                onClick={() => setLimit(limit2 + 10)}
-                className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700"
+                onClick={() => navigate(`/portal/admin/group`)}
+                className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700 max-[500px]:px-3 max-[500px]:py-1 max-[500px]:text-sm"
               >
                 Load More
               </button>
             </div>
-          )}
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

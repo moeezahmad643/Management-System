@@ -15,7 +15,7 @@ export default function CreateGroup() {
       try {
         const res = await fetch("http://localhost:5000/api/admin/users");
         const data = await res.json();
-        if (res.ok) setUsers(data);
+        if (res.ok) setUsers(data.users);
       } catch (err) {
         console.error("Failed to fetch users:", err);
       }
@@ -105,7 +105,7 @@ export default function CreateGroup() {
         {/* Members */}
         <div>
           <label className="block mb-2 font-semibold">Select Members</label>
-          <div className="max-h-40 overflow-y-auto border border-gray-700 rounded p-3 bg-gray-900">
+          <div className="max-h-100 overflow-y-auto border border-gray-700 rounded p-3 bg-gray-900">
             {users.length === 0 ? (
               <p className="text-gray-400">No users available</p>
             ) : (

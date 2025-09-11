@@ -11,12 +11,7 @@ const groupSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    members: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User", // links users to this group
-      },
-    ],
+    members: Array,
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User", // which admin created it

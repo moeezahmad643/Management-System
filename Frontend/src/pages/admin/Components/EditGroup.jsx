@@ -21,7 +21,7 @@ export default function EditGroup() {
       const res = await fetch("http://localhost:5000/api/admin/users");
       const data = await res.json();
       if (res.ok) {
-        setUsers(data);
+        setUsers(data.users);
       }
     } catch (err) {
       console.error("Failed to fetch users:", err);
@@ -37,7 +37,7 @@ export default function EditGroup() {
           setFormData({
             title: data.title,
             description: data.description,
-            members: data.members?.map((m) => m._id) || [],
+            members: data.members || [],
           });
         } else {
           setError(data.message || "Failed to fetch group");
@@ -85,7 +85,7 @@ export default function EditGroup() {
       const data = await res.json();
       if (res.ok) {
         alert("Group updated successfully");
-        navigate("/admin/dashboard");
+        navigate("/portal/admin/dashboard");
       } else {
         alert(data.message || "Error updating group");
       }

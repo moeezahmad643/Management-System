@@ -25,8 +25,8 @@ export default function UserNavbar() {
           <Link to="/portal/user/dashboard" className="hover:underline">
             Dashboard
           </Link>
-          <Link to="/portal/user/missions" className="hover:underline">
-            Missions
+          <Link to="/portal/user/workgroups" className="hover:underline">
+            WorkGroups
           </Link>
           <Link to="/portal/user/profile" className="hover:underline">
             Profile

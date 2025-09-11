@@ -3,26 +3,43 @@ import User from "../models/User.js";
 
 const router = express.Router();
 
-/**
- * @route   GET /api/admin/users
- * @desc    Get all users
- * @access  Admin
- */
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // exclude passwords
-    res.json(users);
+    const limit = parseInt(req.query.limit) || "all";
+
+    let users;
+    if (typeof limit == "number") {
+      users = await User.find().select("-password").limit(limit);
+    }
+    else{
+      users = await User.find().select("-password");
+    }
+    res.json({
+      users,
+    });
   } catch (error) {
     console.error("Get Users Error:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-/**
- * @route   PATCH /api/admin/users/:id/make-admin
- * @desc    Promote a user to admin
- * @access  Admin
- */
+router.get("/user/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id).select(
+      "-password" // exclude password
+    );
+
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 router.patch("/users/:id/make-admin", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
@@ -40,11 +57,6 @@ router.patch("/users/:id/make-admin", async (req, res) => {
   }
 });
 
-/**
- * @route   PATCH /api/admin/users/:id
- * @desc    Edit user info (name, email)
- * @access  Admin
- */
 router.patch("/users/:id", async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -63,11 +75,28 @@ router.patch("/users/:id", async (req, res) => {
   }
 });
 
-/**
- * @route   DELETE /api/admin/users/:id
- * @desc    Delete a user
- * @access  Admin
- */
+router.patch("/userEdit", async (req, res) => {
+  try {
+    const { userId, name, shortDescription, position } = req.body;
+
+    if (!userId) return res.status(400).json({ error: "User ID is required" });
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+
+    if (name) user.name = name;
+    if (shortDescription !== undefined) user.shortDescription = shortDescription;
+    if (position !== undefined) user.position = position;
+
+    await user.save();
+
+    res.json({ message: "Profile updated successfully", user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 router.delete("/users/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);

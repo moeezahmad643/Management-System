@@ -26,8 +26,13 @@ export default function CreateTask() {
           fetch("http://localhost:5000/api/admin/users"),
           fetch("http://localhost:5000/api/groups"),
         ]);
-        setUsers(await userRes.json());
-        setGroups(await groupRes.json());
+
+        const userData = await userRes.json();
+        const groupData = await groupRes.json();
+
+        setUsers(userData.users || []);   // ✅ fix
+        setGroups(groupData || []); // ✅ fix
+        
       } catch (err) {
         console.error("Error fetching users/groups:", err);
       }
@@ -127,15 +132,17 @@ export default function CreateTask() {
   };
   const formats = ["header", "bold", "italic", "underline", "list", "link"];
 
-  // Group users by role
-  const groupedUsers = users.reduce((acc, user) => {
-    const role = user.role || "Others";
-    if (!acc[role]) acc[role] = [];
-    acc[role].push(user);
-    return acc;
-  }, {});
+  // 🔹 Group users by role safely
+  const groupedUsers = Array.isArray(users)
+    ? users.reduce((acc, user) => {
+        const role = user.role || "Others";
+        if (!acc[role]) acc[role] = [];
+        acc[role].push(user);
+        return acc;
+      }, {})
+    : {};
 
-  // Search filter
+  // 🔹 Search filter
   const filteredGroupedUsers = Object.fromEntries(
     Object.entries(groupedUsers).map(([role, roleUsers]) => [
       role,
@@ -173,7 +180,7 @@ export default function CreateTask() {
           className="w-full p-3 rounded bg-gray-900 border border-gray-600 focus:outline-none focus:ring focus:ring-indigo-500"
         />
 
-        {/* Description / Rich Text */}
+        {/* Description */}
         <div className="bg-gray-900 border border-gray-600 rounded quill-dark">
           <ReactQuill
             theme="snow"

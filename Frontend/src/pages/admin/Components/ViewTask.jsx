@@ -56,7 +56,7 @@ export default function ViewTask() {
       try {
         const res = await fetch("http://localhost:5000/api/admin/users");
         const data = await res.json();
-        if (res.ok && Array.isArray(data)) setUsers(data);
+        if (res.ok && Array.isArray(data.users)) setUsers(data.users);
       } catch (err) {
         console.error("Failed to fetch users:", err);
       }
@@ -345,7 +345,7 @@ export default function ViewTask() {
             </button>
 
             <button
-              onClick={navigate.bind(null, "/admin/dashboard")}
+              onClick={navigate.bind(null, "/portal/admin/dashboard")}
               className="bg-blue-500 px-6 py-2 rounded mr-4 hover:bg-blue-600"
             >
               Go Back

@@ -4,19 +4,35 @@ import Group from "../models/Group.js";
 const router = express.Router();
 
 // Create a new group
+// Create a new group
 router.post("/", async (req, res) => {
   try {
     const { title, description, members } = req.body;
 
+
+    console.log(members);
+    
+
+    const membersArray = Array.isArray(members)
+      ? members
+      : members
+      ? members.split(",").map((id) => id.trim())
+      : [];
+
     const group = new Group({
       title,
       description,
-      members: members || [],
+      members: membersArray,
       createdBy: req.user ? req.user._id : null,
     });
 
     await group.save();
-    res.status(201).json(group);
+    const populated = await Group.findById(group._id).populate(
+      "members",
+      "username email"
+    );
+
+    res.status(201).json(populated);
   } catch (err) {
     console.error("Error creating group:", err);
     res.status(500).json({ message: "Server error" });
@@ -26,7 +42,11 @@ router.post("/", async (req, res) => {
 // Get all groups
 router.get("/", async (req, res) => {
   try {
-    const groups = await Group.find().populate("members", "username email");
+    const limitParam = parseInt(req.query.limit) || "all";
+
+    const groups = await Group.find()
+      .populate("members", "username email")
+      .limit(typeof limitParam == "number" ? limitParam : null);
     res.json(groups);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch groups" });
@@ -36,7 +56,10 @@ router.get("/", async (req, res) => {
 // ✅ Get single group by ID
 router.get("/:id", async (req, res) => {
   try {
-    const group = await Group.findById(req.params.id).populate("members", "username email");
+    const group = await Group.findById(req.params.id).populate(
+      "members",
+      "username email"
+    );
     if (!group) return res.status(404).json({ message: "Group not found" });
     res.json(group);
   } catch (err) {
@@ -49,9 +72,15 @@ router.put("/:id", async (req, res) => {
   try {
     const { title, description, members } = req.body;
 
+    const membersArray = Array.isArray(members)
+      ? members
+      : members
+      ? members.split(",").map((id) => id.trim())
+      : [];
+
     const group = await Group.findByIdAndUpdate(
       req.params.id,
-      { title, description, members },
+      { title, description, members: membersArray },
       { new: true }
     ).populate("members", "username email");
 

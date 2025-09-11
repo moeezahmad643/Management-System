@@ -1,25 +1,42 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaEdit, FaTrash, FaPersonBooth, FaSave } from "react-icons/fa"; // icons
+import { HiMiniXMark } from "react-icons/hi2";
 
-// import { useNavigate } from "react-router-dom";
-
-export default function AllUsers({ limit }) {
-  const [limit2, setLimit] = useState(limit);
+export default function AllUsers(props) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   const [editUserId, setEditUserId] = useState(null);
-  const [editForm, setEditForm] = useState({ name: "", email: "" });
+  const [editForm, setEditForm] = useState({ name: "" });
 
-  const [isOpen, setIsOpen] = useState(true); // dropdown open by default
-  // const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 500);
 
-  // Fetch all users
+  const navigate = useNavigate();
+
+  // Screen resize listener
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 500);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Fetch users
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/admin/users");
+      const res = await fetch(
+        `http://localhost:5000/api/admin/users?limit=${props.limit}`
+      );
       const data = await res.json();
-      setUsers(data);
+
+      if (res.ok) {
+        setUsers(data.users);
+      } else {
+        setError(data.message || "Failed to fetch users");
+      }
     } catch (err) {
       console.error(err);
       setError("Failed to fetch users");
@@ -30,9 +47,9 @@ export default function AllUsers({ limit }) {
 
   useEffect(() => {
     fetchUsers();
-  }, [limit2]);
+  }, []);
 
-  // Make admin
+  // --- ACTIONS ---
   const makeAdmin = async (id) => {
     try {
       const res = await fetch(
@@ -50,10 +67,8 @@ export default function AllUsers({ limit }) {
     }
   };
 
-  // Delete user
   const deleteUser = async (id) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
-
     try {
       const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
         method: "DELETE",
@@ -69,13 +84,11 @@ export default function AllUsers({ limit }) {
     }
   };
 
-  // Start editing
   const startEdit = (user) => {
     setEditUserId(user._id);
-    setEditForm({ name: user.name, email: user.email });
+    setEditForm({ name: user.name });
   };
 
-  // Save edit
   const saveEdit = async (id) => {
     try {
       const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
@@ -95,117 +108,162 @@ export default function AllUsers({ limit }) {
     }
   };
 
+  // --- UI ---
   return (
-    <div className="mx-6 my-4 rounded-lg overflow-hidden bg-gray-900 text-white border border-gray-700">
-      {/* Dropdown Header */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
-      >
-        <h1 className="text-xl font-bold">All Users</h1>
-        <span>{isOpen ? "▲" : "▼"}</span>
-      </button>
+    <section
+      className={
+        props.width == "half" ? "w-1/2 pb-6 px-2 lg:w-full" : "w-full pb-6 px-2"
+      }
+    >
+      <div className="w-full rounded-lg overflow-hidden bg-gray-900 text-white border border-gray-700">
+        {/* Dropdown Header */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
+        >
+          <h1 className="text-xl font-bold">All Users</h1>
+          <span>{isOpen ? "▲" : "▼"}</span>
+        </button>
 
-      {isOpen && (
-        <div className="p-6">
-          {loading ? (
-            <p className="text-center">Loading users...</p>
-          ) : error ? (
-            <p className="text-center text-red-500">{error}</p>
-          ) : (
-            <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
-              <thead className="bg-gray-800">
-                <tr>
-                  <th className="p-3 text-left">Name</th>
-                  <th className="p-3 text-left">Email</th>
-                  <th className="p-3 text-left">Role</th>
-                  <th className="p-3 text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.splice(0, limit2).map((user) => (
-                  <tr key={user._id} className="border-t border-gray-700">
-                    <td className="p-3">
-                      {editUserId === user._id ? (
-                        <input
-                          type="text"
-                          value={editForm.name}
-                          onChange={(e) =>
-                            setEditForm({ ...editForm, name: e.target.value })
-                          }
-                          className="px-2 py-1 rounded bg-gray-800 border border-gray-600"
-                        />
-                      ) : (
-                        user.name
-                      )}
-                    </td>
-                    <td className="p-3">
-                      {editUserId === user._id ? (
-                        <input
-                          type="email"
-                          value={editForm.email}
-                          onChange={(e) =>
-                            setEditForm({ ...editForm, email: e.target.value })
-                          }
-                          className="px-2 py-1 rounded bg-gray-800 border border-gray-600"
-                        />
-                      ) : (
-                        user.email
-                      )}
-                    </td>
-                    <td className="p-3">{user.role}</td>
-                    <td className="p-3 flex gap-2 justify-center">
-                      {editUserId === user._id ? (
-                        <>
-                          <button
-                            onClick={() => saveEdit(user._id)}
-                            className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
-                          >
-                            Save
-                          </button>
-                          {user.role !== "admin" && (
+        {isOpen && (
+          <div className="p-6">
+            {loading ? (
+              <p className="text-center">Loading users...</p>
+            ) : error ? (
+              <p className="text-center text-red-500">{error}</p>
+            ) : (
+              <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
+                <thead className="bg-gray-800">
+                  <tr>
+                    <th className={`p-3 text-left ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                      Name
+                    </th>
+                    <th className={`p-3 text-left ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                      Role
+                    </th>
+                    <th className={`p-3 text-center ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user) => {
+                    const showIcons = window.innerWidth <= 1000;
+
+                    return (
+                      <tr key={user._id} className="border-t border-gray-700">
+                        <td className={`p-3 ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                          {editUserId === user._id ? (
+                            <input
+                              type="text"
+                              value={editForm.name}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  name: e.target.value,
+                                })
+                              }
+                              className={`px-2 py-1 rounded bg-gray-800 border border-gray-600 ${
+                                isSmallScreen ? "text-xs" : "text-sm"
+                              }`}
+                            />
+                          ) : (
+                            user.name
+                          )}
+                        </td>
+                        <td className={`p-3 ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                          {user.role}
+                        </td>
+                        <td
+                          className={`p-3 flex gap-2 justify-center ${
+                            isSmallScreen ? "text-xs" : "text-sm"
+                          }`}
+                        >
+                          {editUserId === user._id ? (
+                            <>
+                              <button
+                                onClick={() => saveEdit(user._id)}
+                                className={`bg-green-600 px-3 py-1 rounded hover:bg-green-700 ${
+                                  isSmallScreen ? "text-xs" : "text-sm"
+                                }`}
+                              >
+                                {showIcons ? <FaSave /> : "Save"}
+                              </button>
+                              <button
+                                onClick={() => setEditUserId(null)}
+                                className={`bg-gray-600 px-3 py-1 rounded hover:bg-gray-700 ${
+                                  isSmallScreen ? "text-xs" : "text-sm"
+                                }`}
+                              >
+                                {showIcons ? <HiMiniXMark /> : "Cancel"}
+                              </button>
+                            </>
+                          ) : (
                             <button
-                              onClick={() => makeAdmin(user._id)}
-                              className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+                              onClick={() => startEdit(user)}
+                              className={`bg-yellow-500 px-3 py-1 rounded hover:bg-yellow-600 ${
+                                isSmallScreen ? "text-xs" : "text-sm"
+                              }`}
                             >
-                              Make Admin
+                              {showIcons ? <FaEdit /> : "Edit"}
                             </button>
                           )}
-                        </>
-                      ) : (
-                        <button
-                          onClick={() => startEdit(user)}
-                          className="bg-yellow-500 px-3 py-1 rounded hover:bg-yellow-600"
-                        >
-                          Edit
-                        </button>
-                      )}
 
-                      <button
-                        onClick={() => deleteUser(user._id)}
-                        className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                          {user.role !== "admin" ? (
+                            <button
+                              onClick={() => makeAdmin(user._id)}
+                              className={`bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 ${
+                                isSmallScreen ? "text-xs" : "text-sm"
+                              }`}
+                            >
+                              {showIcons ? <FaPersonBooth /> : "Make Admin"}
+                            </button>
+                          ) : (
+                            <button
+                              className={`bg-blue-700 px-3 py-1 rounded opacity-50 cursor-not-allowed ${
+                                isSmallScreen ? "text-xs" : "text-sm"
+                              }`}
+                              disabled
+                            >
+                              {showIcons ? <FaPersonBooth /> : "Make Admin"}
+                            </button>
+                          )}
 
-          {users.length > limit2 && (
-            <div className="flex justify-center mt-6">
+                          <button
+                            onClick={() => deleteUser(user._id)}
+                            className={`bg-red-600 px-3 py-1 rounded hover:bg-red-700 ${
+                              isSmallScreen ? "text-xs" : "text-sm"
+                            }`}
+                          >
+                            {showIcons ? <FaTrash /> : "Delete"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+
+            <div
+              className={
+                props.moreButton
+                  ? "flex justify-center mt-6"
+                  : "flex justify-center mt-6 hidden"
+              }
+            >
               <button
-                onClick={() => setLimit(limit2 + 10)}
-                className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700"
+                onClick={() => navigate(`/portal/admin/users`)}
+                className={`w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700 ${
+                  isSmallScreen ? "text-xs" : "text-sm"
+                }`}
               >
                 Load More
               </button>
             </div>
-          )}
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

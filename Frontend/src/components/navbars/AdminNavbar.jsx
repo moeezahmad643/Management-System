@@ -13,7 +13,7 @@ export default function AdminNavbar() {
   };
 
   return (
-    <nav className="bg-gray-900 text-gray-100 px-6 py-3 shadow-md">
+    <nav className="bg-gray-900 text-gray-100 px-6 py-6 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/portal/admin/dashboard" className="text-xl font-bold text-white">
