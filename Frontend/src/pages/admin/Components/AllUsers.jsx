@@ -35,11 +35,11 @@ export default function AllUsers(props) {
       if (res.ok) {
         setUsers(data.users);
       } else {
-        setError(data.message || "Failed to fetch users");
+        setError(data.message || "Échec du chargement des utilisateurs");
       }
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch users");
+      setError("Échec du chargement des utilisateurs");
     } finally {
       setLoading(false);
     }
@@ -60,7 +60,7 @@ export default function AllUsers(props) {
       if (res.ok) {
         fetchUsers();
       } else {
-        alert(data.message || "Error promoting user");
+        alert(data.message || "Erreur lors de la promotion de l’utilisateur");
       }
     } catch (err) {
       console.error(err);
@@ -68,7 +68,8 @@ export default function AllUsers(props) {
   };
 
   const deleteUser = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this user?")) return;
+    if (!window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?"))
+      return;
     try {
       const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
         method: "DELETE",
@@ -77,7 +78,7 @@ export default function AllUsers(props) {
       if (res.ok) {
         fetchUsers();
       } else {
-        alert(data.message || "Error deleting user");
+        alert(data.message || "Erreur lors de la suppression de l’utilisateur");
       }
     } catch (err) {
       console.error(err);
@@ -101,7 +102,7 @@ export default function AllUsers(props) {
         setEditUserId(null);
         fetchUsers();
       } else {
-        alert(data.message || "Error updating user");
+        alert(data.message || "Erreur lors de la mise à jour de l’utilisateur");
       }
     } catch (err) {
       console.error(err);
@@ -121,27 +122,39 @@ export default function AllUsers(props) {
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
         >
-          <h1 className="text-xl font-bold">All Users</h1>
+          <h1 className="text-xl font-bold">Tous les utilisateurs</h1>
           <span>{isOpen ? "▲" : "▼"}</span>
         </button>
 
         {isOpen && (
           <div className="p-6">
             {loading ? (
-              <p className="text-center">Loading users...</p>
+              <p className="text-center">Chargement des utilisateurs...</p>
             ) : error ? (
               <p className="text-center text-red-500">{error}</p>
             ) : (
               <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
                 <thead className="bg-gray-800">
                   <tr>
-                    <th className={`p-3 text-left ${isSmallScreen ? "text-xs" : "text-sm"}`}>
-                      Name
+                    <th
+                      className={`p-3 text-left ${
+                        isSmallScreen ? "text-xs" : "text-sm"
+                      }`}
+                    >
+                      Nom
                     </th>
-                    <th className={`p-3 text-left ${isSmallScreen ? "text-xs" : "text-sm"}`}>
-                      Role
+                    <th
+                      className={`p-3 text-left ${
+                        isSmallScreen ? "text-xs" : "text-sm"
+                      }`}
+                    >
+                      Rôle
                     </th>
-                    <th className={`p-3 text-center ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                    <th
+                      className={`p-3 text-center ${
+                        isSmallScreen ? "text-xs" : "text-sm"
+                      }`}
+                    >
                       Actions
                     </th>
                   </tr>
@@ -152,7 +165,11 @@ export default function AllUsers(props) {
 
                     return (
                       <tr key={user._id} className="border-t border-gray-700">
-                        <td className={`p-3 ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                        <td
+                          className={`p-3 ${
+                            isSmallScreen ? "text-xs" : "text-sm"
+                          }`}
+                        >
                           {editUserId === user._id ? (
                             <input
                               type="text"
@@ -171,7 +188,11 @@ export default function AllUsers(props) {
                             user.name
                           )}
                         </td>
-                        <td className={`p-3 ${isSmallScreen ? "text-xs" : "text-sm"}`}>
+                        <td
+                          className={`p-3 ${
+                            isSmallScreen ? "text-xs" : "text-sm"
+                          }`}
+                        >
                           {user.role}
                         </td>
                         <td
@@ -187,7 +208,7 @@ export default function AllUsers(props) {
                                   isSmallScreen ? "text-xs" : "text-sm"
                                 }`}
                               >
-                                {showIcons ? <FaSave /> : "Save"}
+                                {showIcons ? <FaSave /> : "Enregistrer"}
                               </button>
                               <button
                                 onClick={() => setEditUserId(null)}
@@ -195,7 +216,7 @@ export default function AllUsers(props) {
                                   isSmallScreen ? "text-xs" : "text-sm"
                                 }`}
                               >
-                                {showIcons ? <HiMiniXMark /> : "Cancel"}
+                                {showIcons ? <HiMiniXMark /> : "Annuler"}
                               </button>
                             </>
                           ) : (
@@ -205,7 +226,7 @@ export default function AllUsers(props) {
                                 isSmallScreen ? "text-xs" : "text-sm"
                               }`}
                             >
-                              {showIcons ? <FaEdit /> : "Edit"}
+                              {showIcons ? <FaEdit /> : "Modifier"}
                             </button>
                           )}
 
@@ -216,7 +237,7 @@ export default function AllUsers(props) {
                                 isSmallScreen ? "text-xs" : "text-sm"
                               }`}
                             >
-                              {showIcons ? <FaPersonBooth /> : "Make Admin"}
+                              {showIcons ? <FaPersonBooth /> : "Nommer Admin"}
                             </button>
                           ) : (
                             <button
@@ -225,7 +246,7 @@ export default function AllUsers(props) {
                               }`}
                               disabled
                             >
-                              {showIcons ? <FaPersonBooth /> : "Make Admin"}
+                              {showIcons ? <FaPersonBooth /> : "Déjà Admin"}
                             </button>
                           )}
 
@@ -235,7 +256,7 @@ export default function AllUsers(props) {
                               isSmallScreen ? "text-xs" : "text-sm"
                             }`}
                           >
-                            {showIcons ? <FaTrash /> : "Delete"}
+                            {showIcons ? <FaTrash /> : "Supprimer"}
                           </button>
                         </td>
                       </tr>
@@ -258,7 +279,7 @@ export default function AllUsers(props) {
                   isSmallScreen ? "text-xs" : "text-sm"
                 }`}
               >
-                Load More
+                Charger plus
               </button>
             </div>
           </div>

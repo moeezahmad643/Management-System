@@ -34,7 +34,7 @@ export default function ViewSupports() {
       const res = await fetch(`http://localhost:5000/supports/${id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: "Resolved" }),
+        body: JSON.stringify({ status: "Résolu" }),
       });
       if (res.ok) fetchSupport();
     } catch (err) {
@@ -45,14 +45,14 @@ export default function ViewSupports() {
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <h1 className="text-2xl">Loading support message...</h1>
+        <h1 className="text-2xl">Chargement du message de support...</h1>
       </div>
     );
 
   if (!support)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <h1 className="text-2xl">Support message not found</h1>
+        <h1 className="text-2xl">Message de support introuvable</h1>
       </div>
     );
 
@@ -60,32 +60,32 @@ export default function ViewSupports() {
     <div className="flex items-center min-h-screen bg-gray-900 text-white p-10">
       <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-3xl mx-auto">
         <p className="mb-4 p-4 bg-gray-900 rounded">
-          <span className="font-bold text-lg">Subject:</span> {support.subject}
+          <span className="font-bold text-lg">Objet :</span> {support.subject}
         </p>
 
         <div className="mb-4 p-4 bg-gray-900 rounded">
-          <span className="font-bold text-lg">Message:</span>
+          <span className="font-bold text-lg">Message :</span>
           <p className="mt-2">{support.message}</p>
         </div>
 
         <p className="mb-4 p-4 bg-gray-900 rounded">
-          <span className="font-bold text-lg">Status:</span>{" "}
+          <span className="font-bold text-lg">Statut :</span>{" "}
           <span className="capitalize">{support.status}</span>
         </p>
 
         <p className="mb-4 p-4 bg-gray-900 rounded text-gray-400">
-          <span className="font-semibold">Created At:</span>{" "}
+          <span className="font-semibold">Créé le :</span>{" "}
           {new Date(support.createdAt).toLocaleString()}
         </p>
 
-        {/* Buttons */}
+        {/* Boutons */}
         <div className="flex gap-4 mt-4">
           {support.status === "unread" && (
             <button
               onClick={markAsRead}
               className="bg-green-600 px-6 py-2 rounded hover:bg-green-700"
             >
-              Mark as Read
+              Marquer comme lu
             </button>
           )}
 
@@ -93,7 +93,7 @@ export default function ViewSupports() {
             onClick={() => navigate("/portal/admin/supports")}
             className="bg-blue-500 px-6 py-2 rounded hover:bg-blue-600"
           >
-            Go Back
+            Retour
           </button>
         </div>
       </div>

@@ -25,7 +25,7 @@ function Register() {
     setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setError("Les mots de passe ne correspondent pas"); // Passwords do not match
       return;
     }
 
@@ -45,17 +45,17 @@ function Register() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Something went wrong");
+        setError(data.message || "Une erreur est survenue"); // Something went wrong
         return;
       }
 
-      // ✅ Save token + role
+      // ✅ Sauvegarder le token + rôle
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
       navigate(`/portal/${data.role}/dashboard`);
     } catch (err) {
-      setError("Failed to connect to server", err);
+      setError("Échec de la connexion au serveur", err); // Failed to connect to server
     } finally {
       setLoading(false);
     }
@@ -65,7 +65,7 @@ function Register() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
       <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Create an Account
+          Créer un compte {/* Create an Account */}
         </h2>
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -74,7 +74,7 @@ function Register() {
           <input
             type="text"
             name="name"
-            placeholder="Full Name"
+            placeholder="Nom complet" // Full Name
             value={formData.name}
             onChange={handleChange}
             required
@@ -84,7 +84,7 @@ function Register() {
           <input
             type="email"
             name="email"
-            placeholder="Email Address"
+            placeholder="Adresse e-mail" // Email Address
             value={formData.email}
             onChange={handleChange}
             required
@@ -94,7 +94,7 @@ function Register() {
           <input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="Mot de passe" // Password
             value={formData.password}
             onChange={handleChange}
             required
@@ -104,7 +104,7 @@ function Register() {
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder="Confirmer le mot de passe" // Confirm Password
             value={formData.confirmPassword}
             onChange={handleChange}
             required
@@ -116,17 +116,18 @@ function Register() {
             disabled={loading}
             className="w-full bg-indigo-600 text-white p-3 rounded-lg font-medium hover:bg-indigo-700 transition disabled:opacity-50"
           >
-            {loading ? "Creating Account..." : "Sign Up"}
+            {loading ? "Création du compte..." : "S’inscrire"}{" "}
+            {/* Creating Account... / Sign Up */}
           </button>
         </form>
 
         <p className="text-center text-gray-600 mt-4">
-          Already have an account?{" "}
+          Vous avez déjà un compte ?{" "} {/* Already have an account? */}
           <Link
             to="/portal/login"
             className="text-indigo-600 font-semibold hover:underline"
           >
-            Login
+            Se connecter {/* Login */}
           </Link>
         </p>
       </div>

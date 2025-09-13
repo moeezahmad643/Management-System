@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
-export default function CreateGroup() {
+export default function CreerGroupe() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     members: [],
+    messagePolicy: "admins", // par défaut : seuls les admins peuvent envoyer
   });
-  const [users, setUsers] = useState([]); // all available users
+  const [users, setUsers] = useState([]);
   const [message, setMessage] = useState("");
 
-  // Fetch all users
+  // Récupérer tous les utilisateurs
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -17,31 +18,31 @@ export default function CreateGroup() {
         const data = await res.json();
         if (res.ok) setUsers(data.users);
       } catch (err) {
-        console.error("Failed to fetch users:", err);
+        console.error("Échec du chargement des utilisateurs :", err);
       }
     };
     fetchUsers();
   }, []);
 
-  // Handle input change (title + description)
+  // Gérer les changements dans les champs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle member selection
+  // Gérer la sélection/désélection des membres
   const handleMemberToggle = (userId) => {
     setFormData((prev) => {
       const isMember = prev.members.includes(userId);
       return {
         ...prev,
         members: isMember
-          ? prev.members.filter((id) => id !== userId) // remove
-          : [...prev.members, userId], // add
+          ? prev.members.filter((id) => id !== userId)
+          : [...prev.members, userId],
       };
     });
   };
 
-  // Handle submit
+  // Soumettre le formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -55,20 +56,25 @@ export default function CreateGroup() {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage("✅ Group created successfully!");
-        setFormData({ title: "", description: "", members: [] });
+        setMessage("✅ Groupe créé avec succès !");
+        setFormData({
+          title: "",
+          description: "",
+          members: [],
+          messagePolicy: "admins",
+        });
       } else {
-        setMessage(data.message || "❌ Failed to create group");
+        setMessage(data.message || "❌ Échec de la création du groupe");
       }
     } catch (err) {
       console.error(err);
-      setMessage("❌ Server error while creating group");
+      setMessage("❌ Erreur serveur lors de la création du groupe");
     }
   };
 
   return (
     <div className="mx-6 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-6">Create New Group</h1>
+      <h1 className="text-2xl font-bold mb-6">Créer un nouveau groupe</h1>
 
       {message && (
         <p
@@ -81,11 +87,11 @@ export default function CreateGroup() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Title */}
+        {/* Titre */}
         <input
           type="text"
           name="title"
-          placeholder="Group Title (e.g. Staff Members)"
+          placeholder="Titre du groupe (ex : Équipe du staff)"
           value={formData.title}
           onChange={handleChange}
           required
@@ -95,19 +101,35 @@ export default function CreateGroup() {
         {/* Description */}
         <textarea
           name="description"
-          placeholder="Group Purpose/Description"
+          placeholder="Objectif / Description du groupe"
           value={formData.description}
           onChange={handleChange}
           rows="3"
           className="w-full p-3 rounded bg-gray-900 border border-gray-600"
         />
 
-        {/* Members */}
+        {/* Politique de messages */}
         <div>
-          <label className="block mb-2 font-semibold">Select Members</label>
-          <div className="max-h-100 overflow-y-auto border border-gray-700 rounded p-3 bg-gray-900">
+          <label className="block mb-2 font-semibold">
+            Qui peut envoyer des messages ?
+          </label>
+          <select
+            name="messagePolicy"
+            value={formData.messagePolicy}
+            onChange={handleChange}
+            className="w-full p-3 rounded bg-gray-900 border border-gray-600"
+          >
+            <option value="admins">Seulement les administrateurs</option>
+            <option value="public">Tous les membres</option>
+          </select>
+        </div>
+
+        {/* Membres */}
+        <div>
+          <label className="block mb-2 font-semibold">Sélectionner les membres</label>
+          <div className="max-h-60 overflow-y-auto border border-gray-700 rounded p-3 bg-gray-900">
             {users.length === 0 ? (
-              <p className="text-gray-400">No users available</p>
+              <p className="text-gray-400">Aucun utilisateur disponible</p>
             ) : (
               users.map((user) => (
                 <div key={user._id} className="flex items-center gap-2 py-1">
@@ -123,12 +145,12 @@ export default function CreateGroup() {
           </div>
         </div>
 
-        {/* Submit */}
+        {/* Soumettre */}
         <button
           type="submit"
           className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold p-3 rounded"
         >
-          Create Group
+          Créer le groupe
         </button>
       </form>
     </div>

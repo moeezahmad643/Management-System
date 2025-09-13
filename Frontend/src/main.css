@@ -3,8 +3,6 @@
 @tailwind utilities;
 @import "tailwindcss";
 
-
-
 /* Dark Mode Quill Styles */
 .quill-dark .ql-editor {
   color: white; /* Editor text */
@@ -20,25 +18,58 @@
 }
 
 .quill-dark .ql-toolbar .ql-fill {
-  fill: #ffffff; 
+  fill: #ffffff;
 }
 
 .quill-dark .ql-toolbar .ql-picker {
   color: #ffffff; /* Dropdown text */
 }
 
-.ql-picker-options{
-    color: black;
+.ql-picker-options {
+  color: black;
 }
 .quill-dark .ql-editor.ql-blank::before {
   color: #9ca3af; /* Placeholder gray-400 */
 }
 
-.work-section{
-    h1{
-        font-size: 2em;
-    }
-    h2{
-        font-size: 1.5em;
-    }
+.work-section {
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+
+  ol {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+
+  li[data-list="ordered"] {
+    /* your styles here */
+    list-style-type: decimal; /* example: force numbers */
+    margin-left: 20px;
+  }
+}
+
+/* in index.css or global.css */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: theme("colors.gray.900"); /* tailwind theme */
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: theme("colors.green.600");
+  border-radius: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: theme("colors.green.500");
+}
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.green.600") theme("colors.gray.900");
 }

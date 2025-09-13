@@ -4,7 +4,7 @@ export default function About() {
       <section
         className="w-full h-30 relative flex items-center justify-center text-white"
         style={{
-          backgroundImage: "url('/about.png')", // <-- this is correct for public folder
+          backgroundImage: "url('/about.png')",
           backgroundSize: "cover",
           backgroundPosition: "top",
           minHeight: "30vh",
@@ -12,7 +12,7 @@ export default function About() {
       >
         <div className=" bg-opacity-50 w-full h-full flex items-center justify-center">
           <h2 className="text-2xl md:text-4xl font-bold text-center px-6">
-            Welcome to the Guinea National Police Portal
+            Bienvenue sur le Portail de la Police Nationale de Guinée
           </h2>
         </div>
       </section>
@@ -21,34 +21,34 @@ export default function About() {
         <div className="flex-1">
           <img
             src="/history.jpg"
-            alt="Guinea Police History"
+            alt="Histoire de la Police Guinéenne"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
 
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Our History</h2>
+          <h2 className="text-5xl font-bold mb-4">Notre Histoire</h2>
           <p className="mb-3 text-lg py-2">
-            Established in the wake of independence, the National Police of
-            Guinea has roots deeply intertwined with the country&apos;s journey
-            from colonial rule to sovereignty. In the early years, the force
-            adapted colonial-era structures into a unified national system
-            dedicated to safeguarding communities and public order.
+            Créée au lendemain de l’indépendance, la Police Nationale de Guinée
+            est intimement liée au parcours du pays, de la colonisation à la
+            souveraineté. Dans ses premières années, elle a transformé les
+            structures héritées de l’époque coloniale en un système national
+            unifié, dédié à la protection des communautés et au maintien de
+            l’ordre public.
           </p>
           <p className="mb-3 text-lg py-2">
-            Throughout the decades that followed, the National Police played a
-            critical role in Guinea’s evolving political and social landscape.
-            Whether resolving periods of unrest or supporting public health
-            efforts, the police became a symbol of stability, molded by reforms
-            to enhance accountability and modernize standards of training,
-            equipment, and community outreach.
+            Au fil des décennies, la Police Nationale a joué un rôle crucial
+            dans l’évolution politique et sociale du pays. Qu’il s’agisse de
+            gérer des périodes de troubles ou de soutenir des efforts de santé
+            publique, elle est devenue un symbole de stabilité, renforcé par des
+            réformes visant à améliorer la transparence et à moderniser la
+            formation, l’équipement et l’engagement communautaire.
           </p>
           <p className="mb-3 text-lg py-2">
-            In recent years, the force has embraced modernization—expanding its
-            ranks, introducing specialized units, and integrating contemporary
-            policing strategies such as community-focused initiatives. This
-            development underlines the commitment to uphold trust, transparency,
-            and professionalism in serving citizens nationwide.
+            Ces dernières années, la force s’est modernisée — augmentation des
+            effectifs, création d’unités spécialisées, intégration de nouvelles
+            stratégies de police de proximité — afin de renforcer la confiance,
+            la transparence et le professionnalisme au service des citoyens.
           </p>
         </div>
       </section>
@@ -57,32 +57,32 @@ export default function About() {
         <div className="flex-1">
           <img
             src="/community.jpg"
-            alt="Community Policing"
+            alt="Police de Proximité"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Community Policing</h2>
+          <h2 className="text-5xl font-bold mb-4">Police de Proximité</h2>
           <p className="mb-3 text-lg py-2">
-            From 2015 to 2020, the Partners for Security in Guinea project
-            brought international support to institutionalize community
-            policing—aimed at bridging gaps between law enforcement and
-            citizens. Backed by the U.S. Department of State and local
-            stakeholders, this initiative fostered engagement through regular
-            dialogues, school programs, and public-awareness campaigns.
+            De 2015 à 2020, le projet « Partners for Security in Guinea » a
+            soutenu l’institutionnalisation de la police de proximité, visant à
+            rapprocher les forces de l’ordre des citoyens. Financé par le
+            Département d’État américain et des partenaires locaux, ce projet a
+            encouragé le dialogue, les programmes scolaires et les campagnes de
+            sensibilisation.
           </p>
           <p className="mb-3 text-lg py-2">
-            This program helped transform the policing model, reinforcing the
-            idea that sustainable safety comes from mutual trust. Training
-            officers in community-specific needs, emphasizing human rights, and
-            creating local forums for reporting and dialogue made policing more
-            inclusive and effective.
+            Ce programme a transformé le modèle policier, mettant l’accent sur
+            la confiance mutuelle comme condition essentielle de sécurité
+            durable. La formation adaptée aux besoins locaux, le respect des
+            droits humains et la création de forums communautaires ont rendu la
+            police plus inclusive et efficace.
           </p>
           <p>
-            As a result, Guinea’s National Police has increasingly reflected
-            these values—implementing outreach programs, civilian advisory
-            boards, and preventive campaigns, particularly in neighborhoods
-            historically underserved by traditional law enforcement.
+            Ainsi, la Police Nationale de Guinée reflète de plus en plus ces
+            valeurs, à travers des programmes de sensibilisation, des conseils
+            citoyens et des campagnes de prévention, notamment dans les zones
+            historiquement moins desservies.
           </p>
         </div>
       </section>
@@ -91,31 +91,29 @@ export default function About() {
         <div className="flex-1">
           <img
             src="/partners.jpg"
-            alt="Partners and International Cooperation"
+            alt="Partenaires et Coopération"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Partners & Cooperation</h2>
+          <h2 className="text-5xl font-bold mb-4">Partenaires & Coopération</h2>
           <p className="mb-3 text-lg py-2">
-            Guinea’s National Police maintains strong ties with international
-            partners to bolster capacity and institutional reform. Through
-            coordination with Interpol and Africa-wide networks like AFRIPOL,
-            the force enhances intelligence sharing and tackles cross-border
-            crime, from trafficking to terrorism.
+            La Police Nationale de Guinée entretient des relations solides avec
+            des partenaires internationaux afin de renforcer ses capacités et
+            ses réformes institutionnelles. Grâce à la coopération avec Interpol
+            et des réseaux africains comme AFRIPOL, elle améliore le partage
+            d’informations et lutte contre la criminalité transfrontalière.
           </p>
           <p className="mb-3 text-lg py-2">
-            Collaboration with global entities such as the UK Home Office has
-            fostered joint training, strategic guidance, and infrastructure
-            improvements. These relationships help the police stay prepared for
-            emerging security threats and adopt best practices.
+            La collaboration avec des institutions telles que le Home Office du
+            Royaume-Uni a favorisé la formation conjointe, les conseils
+            stratégiques et l’amélioration des infrastructures, préparant la
+            police aux menaces émergentes.
           </p>
           <p>
-            At the national level, the Partners for Security in Guinea
-            initiative serves as a benchmark for reform, advocating for
-            rights-based, community-first policing. Its legacy provides a
-            roadmap for other national efforts to improve transparency and
-            effectiveness.
+            Au niveau national, l’initiative « Partners for Security in Guinea »
+            constitue une référence en matière de réforme, prônant une police
+            fondée sur les droits humains et la proximité avec les citoyens.
           </p>
         </div>
       </section>
@@ -124,59 +122,58 @@ export default function About() {
         <div className="flex-1">
           <img
             src="/missopn.jpg"
-            alt="Mission & Values"
+            alt="Mission et Valeurs"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Mission & Values</h2>
+          <h2 className="text-5xl font-bold mb-4">Mission & Valeurs</h2>
           <p className="mb-3 text-lg py-2">
-            The mission of the Guinea National Police is to ensure public
-            safety, enforce laws impartially, and foster trust within
-            communities. Upholding human rights, transparency, and
-            professionalism is central to every police action across the nation.
+            La mission de la Police Nationale de Guinée est d’assurer la
+            sécurité publique, de faire respecter les lois de manière impartiale
+            et de renforcer la confiance des citoyens. Le respect des droits
+            humains, la transparence et le professionnalisme sont au cœur de
+            chaque action policière.
           </p>
           <p className="mb-3 text-lg py-2">
-            Our core values include integrity, service, justice, accountability,
-            and innovation. Officers are trained to uphold these values in
-            day-to-day operations, building a reliable and community-focused
-            force.
+            Nos valeurs fondamentales incluent l’intégrité, le service, la
+            justice, la responsabilité et l’innovation. Les agents sont formés à
+            incarner ces valeurs dans leurs activités quotidiennes.
           </p>
           <p className="mb-3 text-lg py-2">
-            By embedding these principles, the National Police seeks to not only
-            prevent crime but also enhance public confidence, providing a safe
-            environment for citizens to thrive.
+            En intégrant ces principes, la Police Nationale vise à prévenir la
+            criminalité tout en renforçant la confiance publique et en offrant
+            un environnement sûr aux citoyens.
           </p>
         </div>
       </section>
 
+      {/* --- je continue --- */}
       <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-20">
         <div className="flex-1">
           <img
             src="/training.jpg"
-            alt="Police Training"
+            alt="Formation et Professionnalisme"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Training & Development</h2>
+          <h2 className="text-5xl font-bold mb-4">Formation & Professionnalisme</h2>
           <p className="mb-3 text-lg py-2">
-            Continuous training is essential to maintain a modern, effective
-            police force. Guinea National Police invests heavily in officer
-            development, covering areas such as criminal investigation,
-            emergency response, cybercrime, and leadership.
+            La formation est une pierre angulaire de la modernisation de la Police Nationale. 
+            Les académies et écoles de police en Guinée se concentrent sur le développement 
+            de compétences techniques, la gestion des droits humains et la police de proximité.
           </p>
           <p className="mb-3 text-lg py-2">
-            Training academies focus on both theoretical knowledge and practical
-            exercises, simulating real-world scenarios. This ensures officers
-            are equipped to handle diverse challenges, from local incidents to
-            national emergencies.
+            Les programmes de formation abordent des thèmes essentiels tels que 
+            la gestion des foules, l’enquête criminelle, la cybercriminalité 
+            et la lutte contre le terrorisme, tout en mettant l’accent sur 
+            le respect des normes internationales.
           </p>
-          <p className="mb-3 text-lg py-2">
-            Additionally, partnerships with international agencies allow for
-            advanced courses in forensic science, human rights enforcement, and
-            intelligence-led policing—keeping the force updated with global best
-            practices.
+          <p>
+            Ces efforts visent à produire une police professionnelle, responsable 
+            et proche des citoyens, capable de répondre aux défis sécuritaires 
+            modernes de manière efficace et transparente.
           </p>
         </div>
       </section>
@@ -184,29 +181,22 @@ export default function About() {
       <section className="flex flex-col md:flex-row-reverse items-center gap-10 px-6 md:px-20">
         <div className="flex-1">
           <img
-            src="/regions.jpg"
-            alt="Regional Police Units"
+            src="public.jpg"
+            alt="Présence Régionale"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Regional Presence</h2>
+          <h2 className="text-5xl font-bold mb-4">Présence Régionale</h2>
           <p className="mb-3 text-lg py-2">
-            The Guinea National Police operates across eight regions, each
-            managed by a regional command center. This decentralized approach
-            allows rapid response to local issues while maintaining national
-            coordination.
+            La Police Nationale est représentée dans toutes les régions du pays 
+            à travers des commissariats, des brigades spécialisées et des postes 
+            de police de proximité. Cette présence permet une couverture nationale 
+            et garantit un accès à la sécurité pour tous les citoyens.
           </p>
           <p className="mb-3 text-lg py-2">
-            Specialized units, such as the Judicial Police, Border Security, and
-            Anti-Crime Brigades, are deployed according to regional needs.
-            Community liaison officers engage directly with citizens to ensure
-            proactive policing.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            Regional presence is further strengthened through mobile units and
-            emergency response teams, which can be dispatched swiftly during
-            crises or large-scale public events.
+            Chaque région bénéficie de programmes adaptés à ses réalités locales, 
+            renforçant ainsi l’efficacité des interventions et le lien avec les communautés.
           </p>
         </div>
       </section>
@@ -214,29 +204,23 @@ export default function About() {
       <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-20">
         <div className="flex-1">
           <img
-            src="/community1.jpg"
-            alt="Community Programs"
+            src="/community.jpg"
+            alt="Programmes Communautaires"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Community Programs</h2>
+          <h2 className="text-5xl font-bold mb-4">Programmes Communautaires</h2>
           <p className="mb-3 text-lg py-2">
-            Community engagement is a cornerstone of modern policing. Guinea
-            National Police runs a variety of programs targeting youth
-            education, neighborhood safety, and citizen awareness. These
-            initiatives aim to prevent crime while fostering trust.
+            La Police de Guinée met en place des initiatives communautaires 
+            telles que des campagnes de sensibilisation, des ateliers dans 
+            les écoles et des partenariats avec des organisations civiles.
           </p>
           <p className="mb-3 text-lg py-2">
-            Programs include school workshops, public safety seminars, and
-            volunteer initiatives, creating opportunities for citizens to
-            participate in security efforts. Advisory boards provide feedback to
-            improve service quality.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            By maintaining active communication channels, including hotlines and
-            local forums, the police ensure communities are informed, empowered,
-            and involved in safeguarding their environment.
+            Ces programmes visent à prévenir la criminalité, à sensibiliser 
+            sur des thèmes comme la sécurité routière, la lutte contre les 
+            drogues, et à promouvoir la collaboration entre la police et 
+            les jeunes générations.
           </p>
         </div>
       </section>
@@ -244,89 +228,25 @@ export default function About() {
       <section className="flex flex-col md:flex-row-reverse items-center gap-10 px-6 md:px-20">
         <div className="flex-1">
           <img
-            src="/technology.jpg"
-            alt="Technology & Innovation"
+            src="technology.jpg"
+            alt="Vision d'Avenir"
             className="w-full h-150 object-cover rounded-xl shadow-lg"
           />
         </div>
         <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Technology & Innovation</h2>
+          <h2 className="text-5xl font-bold mb-4">Vision d’Avenir</h2>
           <p className="mb-3 text-lg py-2">
-            Modern technology plays a critical role in enhancing efficiency and
-            transparency. The Guinea National Police utilizes digital reporting
-            systems, mobile patrol apps, and centralized databases for crime
-            tracking and resource management.
+            La Police Nationale de Guinée s’engage à poursuivre ses réformes 
+            et à devenir une institution moderne, transparente et proche des citoyens.
           </p>
           <p className="mb-3 text-lg py-2">
-            Innovative tools such as GIS mapping, body cameras, and automated
-            case management allow for better accountability and informed
-            decision-making. Officers receive ongoing training in these
-            technologies to optimize daily operations.
+            Les objectifs futurs incluent l’intégration des nouvelles technologies, 
+            l’amélioration de la cybersécurité, le renforcement de la coopération 
+            internationale et l’élargissement des programmes de police de proximité.
           </p>
-          <p className="mb-3 text-lg py-2">
-            Technology also facilitates public interaction, including online
-            reporting portals, real-time alerts, and information campaigns.
-            These systems reinforce trust, ensuring citizens can engage with the
-            police quickly and efficiently.
-          </p>
-        </div>
-      </section>
-
-      <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-20">
-        <div className="flex-1">
-          <img
-            src="/partners.jpg"
-            alt="International Cooperation"
-            className="w-full h-150 object-cover rounded-xl shadow-lg"
-          />
-        </div>
-        <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">International Cooperation</h2>
-          <p className="mb-3 text-lg py-2">
-            The Guinea National Police collaborates with global law enforcement
-            agencies to combat transnational crime. Partnerships with Interpol,
-            AFRIPOL, and regional bodies ensure information sharing and
-            coordinated operations against organized crime networks.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            Joint exercises, training exchanges, and strategic workshops enhance
-            the capacity of officers and introduce international best practices.
-            This cooperation strengthens the nation’s resilience against
-            evolving security threats.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            By participating in multinational initiatives, Guinea contributes to
-            regional stability while continuously improving its own policing
-            standards.
-          </p>
-        </div>
-      </section>
-
-      <section className="flex flex-col md:flex-row-reverse items-center gap-10 px-6 md:px-20">
-        <div className="flex-1">
-          <img
-            src="/background-2.jpg"
-            alt="Specialized Units"
-            className="w-full h-150 object-cover rounded-xl shadow-lg"
-          />
-        </div>
-        <div className="flex-1 text-gray-800">
-          <h2 className="text-5xl font-bold mb-4">Specialized Units</h2>
-          <p className="mb-3 text-lg py-2">
-            Guinea National Police operates specialized units to handle complex
-            operations. This includes the Judicial Police, Anti-Crime Brigade,
-            Counter-Terrorism, and Border Security teams, all equipped with
-            specialized training and tools.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            These units operate both independently and in coordination with
-            regular patrol forces, addressing crimes that require technical
-            expertise, rapid response, or intelligence-driven interventions.
-          </p>
-          <p className="mb-3 text-lg py-2">
-            The existence of these units ensures a multi-layered policing
-            strategy capable of protecting citizens against modern threats while
-            maintaining high professional standards.
+          <p>
+            L’avenir de la Police guinéenne repose sur la confiance, la 
+            transparence et l’engagement à protéger chaque citoyen, partout sur le territoire.
           </p>
         </div>
       </section>

@@ -13,6 +13,7 @@ import Group from "../pages/admin/Group";
 import ViewSupports from "../pages/admin/ViewSupports";
 import Supports from "../pages/admin/Supports";
 import ViewGroup from "../pages/admin/ViewGroup";
+import AddMessageInGroup from "../pages/admin/AddMessageInGroup";
 
 export default function AdminLayout() {
   return (
@@ -28,6 +29,7 @@ export default function AdminLayout() {
           <Route path="supports" element={<Supports />} />
           <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="add-message/:id" element={<AddMessageInGroup />} />
           <Route path="tasks/:id" element={<ViewTask />} />
           <Route path="viewgroup/:id" element={<ViewGroup />} />
           <Route path="supports/:id" element={<ViewSupports />} />

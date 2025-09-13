@@ -7,39 +7,39 @@ export default function SupportFAQs() {
 
   const faqs = [
     {
-      question: "How do I log in to the portal?",
+      question: "Comment puis-je me connecter au portail ?",
       answer:
-        "Go to the login page and enter your registered email and password. If you are a first-time user, check your email for an activation link or contact support.",
+        "Allez sur la page de connexion et entrez votre adresse e-mail et votre mot de passe enregistrés. Si vous êtes un nouvel utilisateur, vérifiez votre e-mail pour un lien d’activation ou contactez le support.",
     },
     {
-      question: "I forgot my password, what should I do?",
+      question: "J’ai oublié mon mot de passe, que dois-je faire ?",
       answer:
-        "Click on 'Forgot Password' on the login page. Enter your registered email address, and you will receive a link to reset your password.",
+        "Cliquez sur « Mot de passe oublié » sur la page de connexion. Entrez votre adresse e-mail enregistrée et vous recevrez un lien pour réinitialiser votre mot de passe.",
     },
     {
-      question: "How do I update my personal information?",
+      question: "Comment puis-je mettre à jour mes informations personnelles ?",
       answer:
-        "After logging in, go to the 'Profile' section. You can update your contact details, address, or other personal information from there.",
+        "Après vous être connecté, allez dans la section « Profil ». Vous pouvez y mettre à jour vos coordonnées, votre adresse ou d’autres informations personnelles.",
     },
     {
-      question: "The portal is not loading properly, what can I try?",
+      question: "Le portail ne se charge pas correctement, que puis-je essayer ?",
       answer:
-        "First, refresh the page or clear your browser cache. Make sure your internet connection is stable. If the problem persists, try using another browser or device.",
+        "Commencez par actualiser la page ou vider le cache de votre navigateur. Assurez-vous que votre connexion internet est stable. Si le problème persiste, essayez un autre navigateur ou appareil.",
     },
     {
-      question: "How can I check the status of my support request?",
+      question: "Comment puis-je vérifier l’état de ma demande de support ?",
       answer:
-        "After submitting a support request, log in and navigate to the 'My Support Tickets' section. There you can see the status (Unread, In Progress, Resolved).",
+        "Après avoir soumis une demande de support, connectez-vous et allez dans la section « Mes Tickets de Support ». Vous pourrez y voir le statut (Non lu, En cours, Résolu).",
     },
     {
-      question: "I submitted a form but did not get confirmation.",
+      question: "J’ai soumis un formulaire mais je n’ai pas reçu de confirmation.",
       answer:
-        "Please check your spam or junk mail folder for the confirmation email. If you still don’t see it, contact support directly with your details.",
+        "Vérifiez votre dossier spam ou courriers indésirables pour l’e-mail de confirmation. Si vous ne le trouvez toujours pas, contactez directement le support avec vos informations.",
     },
     {
-      question: "How can I contact support directly?",
+      question: "Comment puis-je contacter le support directement ?",
       answer:
-        "You can use the support form above or email us at support@guineapolice.gov. Our team typically replies within 24–48 hours.",
+        "Vous pouvez utiliser le formulaire de support ci-dessus ou nous écrire à support@guineapolice.gov. Notre équipe répond généralement sous 24 à 48 heures.",
     },
   ];
 
@@ -50,18 +50,18 @@ export default function SupportFAQs() {
   return (
     <div className="max-w-4xl mx-auto py-20 px-6">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        Frequently Asked Questions
+        Foire Aux Questions (FAQ)
       </h2>
       <p className="text-gray-600 text-center mb-8">
-        Find quick answers to common issues. Use the search bar or expand a
-        question to see more details.
+        Retrouvez rapidement des réponses aux problèmes les plus courants.
+        Utilisez la barre de recherche ou cliquez sur une question pour voir les détails.
       </p>
 
-      {/* Search Bar */}
+      {/* Barre de recherche */}
       <div className="relative mb-8 max-w-md mx-auto">
         <input
           type="text"
-          placeholder="Search your issue..."
+          placeholder="Recherchez votre problème..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full border border-gray-300 rounded-lg p-3 pl-10 focus:ring focus:ring-blue-300"
@@ -96,7 +96,7 @@ export default function SupportFAQs() {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">No results found ❌</p>
+          <p className="text-center text-gray-500">Aucun résultat trouvé ❌</p>
         )}
       </div>
     </div>

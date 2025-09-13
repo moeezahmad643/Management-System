@@ -14,12 +14,12 @@ export default function Home() {
 
           <div className="flex flex-col justify-end p-10 lg:justify-center lg:w-1/2 w-full">
             <h1 className="text-4xl text-shadow-lg lg:text-5xl md:text-4xl font-bold mb-6 leading-tight">
-              Guinea National Police <br /> Management System
+              Système de Gestion de la Police Nationale <br /> de Guinée
             </h1>
             <p className="text-lg text-shadow-lg md:text-xl max-w-lg">
-              Our mission is to ensure safety, protect citizens, and strengthen
-              trust between the police and the community through transparency
-              and modern digital services.
+              Notre mission est d’assurer la sécurité, de protéger les citoyens
+              et de renforcer la confiance entre la police et la communauté grâce
+              à la transparence et aux services numériques modernes.
             </p>
 
             {loggedIn ? (
@@ -28,13 +28,13 @@ export default function Home() {
                   href="/portal/login"
                   className="bg-yellow-400 text-black px-6 py-3 text-lg font-semibold hover:bg-yellow-500 transition mt-6 w-fit"
                 >
-                  Access the Portal
+                  Accéder au Portail
                 </a>
                 <a
                   href="/Guide"
                   className="bg-yellow-400 text-black px-6 py-3 text-lg font-semibold hover:bg-yellow-500 transition mt-6 w-fit"
                 >
-                  See Guide
+                  Voir le Guide
                 </a>
               </span>
             ) : (
@@ -42,7 +42,7 @@ export default function Home() {
                 href="/about"
                 className="bg-yellow-400 text-black px-6 py-2 text-lg font-semibold hover:bg-yellow-500 transition mt-6 w-fit"
               >
-                About Us
+                À Propos de Nous
               </a>
             )}
           </div>
@@ -52,26 +52,26 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6 relative">
         <div className="grid gap-8 md:grid-cols-3">
           <div className="relative -top-1 bg-blue-800 text-white shadow-lg rounded-lg p-8 text-center transition-all duration-300 hover:-top-5 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold mb-4">Citizen Safety</h3>
+            <h3 className="text-xl font-semibold mb-4">Sécurité des Citoyens</h3>
             <p className="text-gray-100">
-              Ensuring protection of lives and properties through dedicated
-              policing and digital monitoring.
+              Protection des vies et des biens grâce à un service de police
+              dédié et une surveillance numérique.
             </p>
           </div>
 
           <div className="relative -top-1 bg-blue-800 text-white shadow-lg rounded-lg p-8 text-center transition-all duration-300 hover:-top-5 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold mb-4">Transparency</h3>
+            <h3 className="text-xl font-semibold mb-4">Transparence</h3>
             <p className="text-gray-100">
-              Building trust by providing open access to services and
-              information through our online portal.
+              Renforcer la confiance en offrant un accès ouvert aux services et
+              aux informations via notre portail en ligne.
             </p>
           </div>
 
           <div className="relative -top-1 bg-blue-800 text-white shadow-lg rounded-lg p-8 text-center transition-all duration-300 hover:-top-5 hover:shadow-2xl">
-            <h3 className="text-xl font-semibold mb-4">Digital Services</h3>
+            <h3 className="text-xl font-semibold mb-4">Services Numériques</h3>
             <p className="text-gray-100">
-              Modern solutions for faster processing of complaints, reports, and
-              support queries.
+              Solutions modernes pour un traitement plus rapide des plaintes,
+              rapports et demandes de support.
             </p>
           </div>
         </div>
@@ -80,29 +80,30 @@ export default function Home() {
       <section className="w-4/5 mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
         <img
           src="/community1.jpg"
-          alt="Community Policing"
+          alt="Police Communautaire"
           className="w-full h-80 object-cover rounded-lg shadow-lg"
         />
 
         <div>
-          <h2 className="text-5xl font-bold mb-4">Who We Are</h2>
+          <h2 className="text-5xl font-bold mb-4">Qui Nous Sommes</h2>
           <p className="text-gray-700 text-lg mb-4">
-            The Guinea National Police is more than just an institution — we are
-            a team committed to serving and protecting every citizen. Our
-            mission goes beyond security; we aim to build trust, uphold justice,
-            and foster unity within communities.
+            La Police Nationale de Guinée est plus qu’une institution — nous
+            sommes une équipe engagée à servir et protéger chaque citoyen. Notre
+            mission va au-delà de la sécurité ; nous visons à instaurer la
+            confiance, défendre la justice et renforcer l’unité au sein des
+            communautés.
           </p>
           <p className="text-gray-700 mb-6">
-            From crime prevention programs to community partnerships, we are
-            focused on creating a safer, more transparent, and digitally
-            connected nation.
+            Des programmes de prévention de la criminalité aux partenariats
+            communautaires, nous travaillons à créer une nation plus sûre, plus
+            transparente et numériquement connectée.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="/about"
               className="bg-blue-800 text-white px-6 py-3 font-semibold rounded-lg hover:bg-blue-800 transition"
             >
-              Learn More About Us
+              En Savoir Plus
             </a>
           </div>
         </div>
@@ -110,111 +111,111 @@ export default function Home() {
 
       <section className="w-4/5 mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
         <div>
-          <h2 className="text-6xl font-bold mb-4">Stay Connected</h2>
+          <h2 className="text-6xl font-bold mb-4">Restez Connectés</h2>
           <p className="text-gray-700 text-lg mb-4">
-            Whether you have questions, need urgent assistance, or simply want
-            to share your feedback, we are here to listen. Your voice matters —
-            and it helps us serve you better.
+            Que vous ayez des questions, besoin d’une assistance urgente ou
+            simplement envie de partager vos retours, nous sommes à votre
+            écoute. Votre voix compte — et elle nous aide à mieux vous servir.
           </p>
           <p className="text-gray-700 mb-6">
-            Our support team and officers are available to respond to your
-            queries, provide guidance, and ensure that you always feel heard and
-            supported.
+            Notre équipe de support et nos agents sont disponibles pour répondre
+            à vos demandes, vous guider et s’assurer que vous soyez toujours
+            entendus et soutenus.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="/contact"
               className="bg-blue-800 text-white px-6 py-3 font-semibold rounded-lg hover:bg-blue-800 transition"
             >
-              Contact Us Today
+              Contactez-Nous
             </a>
           </div>
         </div>
 
         <img
           src="/background-2.jpg"
-          alt="Get in Touch"
+          alt="Nous Contacter"
           className="w-full h-80 object-cover rounded-lg shadow-lg"
         />
       </section>
 
       <section className="bg-gray-100 py-20 px-6 text-center">
         <blockquote className="text-2xl md:text-3xl italic font-semibold text-gray-800 max-w-3xl mx-auto">
-          "A safe community is built on trust, service, and dedication — we
-          stand committed to protecting every citizen."
+          "Une communauté sûre se construit sur la confiance, le service et la
+          détermination — nous restons engagés à protéger chaque citoyen."
         </blockquote>
       </section>
 
       <section className="bg-gray-50 py-20 px-6">
         <div className="max-w-6xl mx-auto text-center mb-12">
           <h2 className="text-3xl font-bold">
-            Services We Provide to the Public
+            Services Que Nous Offrons au Public
           </h2>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-            We are committed to delivering efficient, transparent, and
-            accessible services to ensure safety, trust, and support for every
-            citizen in Guinea.
+            Nous nous engageons à fournir des services efficaces, transparents
+            et accessibles afin de garantir la sécurité, la confiance et le
+            soutien de chaque citoyen en Guinée.
           </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Complaint Filing
+              Dépôt de Plaintes
             </h3>
             <p className="text-gray-600">
-              Easily file complaints online or in person and track the progress
-              of your case.
+              Déposez facilement vos plaintes en ligne ou en personne et suivez
+              l’évolution de votre dossier.
             </p>
           </div>
 
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Emergency Helpline
+              Ligne d’Urgence
             </h3>
             <p className="text-gray-600">
-              24/7 helpline for urgent cases such as theft, assault, or public
-              safety concerns.
+              Ligne d’assistance disponible 24/7 pour les cas urgents comme le
+              vol, l’agression ou les problèmes de sécurité publique.
             </p>
           </div>
 
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Lost & Found Assistance
+              Objets Perdus & Retrouvés
             </h3>
             <p className="text-gray-600">
-              Report lost items or recover belongings found and registered in
-              our system.
+              Signalez les objets perdus ou récupérez vos biens enregistrés dans
+              notre système.
             </p>
           </div>
 
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Verification Services
+              Services de Vérification
             </h3>
             <p className="text-gray-600">
-              Quick verification for documents, identity, and police clearance
-              certificates.
+              Vérification rapide des documents, identités et certificats de
+              casier judiciaire.
             </p>
           </div>
 
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Community Awareness
+              Sensibilisation Communautaire
             </h3>
             <p className="text-gray-600">
-              Educational programs, safety campaigns, and awareness drives for
-              citizens.
+              Programmes éducatifs, campagnes de sécurité et actions de
+              sensibilisation pour les citoyens.
             </p>
           </div>
 
           <div className="bg-white shadow-md p-6 rounded-lg hover:shadow-lg transition">
             <h3 className="text-xl font-semibold text-black-700 mb-3">
-              Support Requests
+              Demandes d’Assistance
             </h3>
             <p className="text-gray-600">
-              Dedicated online support system to resolve citizen queries and
-              provide guidance.
+              Système de support en ligne dédié pour répondre aux demandes des
+              citoyens et fournir des conseils.
             </p>
           </div>
         </div>
@@ -222,35 +223,35 @@ export default function Home() {
 
       <section className="bg-blue-800 text-white py-16 px-6 text-center mt-16 rounded-lg shadow-lg max-w-5xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Need Help or Want to Reach Us?
+          Besoin d’Aide ou Envie de Nous Contacter ?
         </h2>
         <p className="text-lg mb-8 max-w-2xl mx-auto">
-          Our team is available to answer your questions, provide assistance,
-          and ensure your concerns are addressed quickly. Don’t hesitate to get
-          in touch.
+          Notre équipe est disponible pour répondre à vos questions, vous aider
+          et s’assurer que vos préoccupations soient prises en charge
+          rapidement. N’hésitez pas à nous contacter.
         </p>
         <a
           href="/contact"
           className="bg-yellow-400 text-black px-8 py-3 text-lg font-semibold rounded-lg hover:bg-yellow-500 transition"
         >
-          Contact Us Now
+          Contactez-Nous Maintenant
         </a>
       </section>
 
       {loggedIn && (
         <section className="bg-blue-800 text-white py-20 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Join Us in Building a Safer Community
+            Rejoignez-Nous pour Construire une Communauté Plus Sûre
           </h2>
           <p className="text-lg mb-8">
-            Access our services today and help us strengthen trust between
-            citizens and the police.
+            Accédez à nos services dès aujourd’hui et contribuez à renforcer la
+            confiance entre les citoyens et la police.
           </p>
           <a
             href="/portal/login"
             className="bg-black text-white-400 px-8 py-3 text-lg font-semibold rounded-lg hover:bg-gray-900 transition"
           >
-            Get Started
+            Commencer
           </a>
         </section>
       )}

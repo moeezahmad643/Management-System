@@ -22,11 +22,11 @@ export default function AllSupports(props) {
       if (res.ok) {
         setSupports(data);
       } else {
-        setError(data.message || "Failed to fetch supports");
+        setError(data.message || "Échec du chargement des messages de support"); // Failed to fetch supports
       }
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch supports");
+      setError("Échec du chargement des messages de support"); // Failed to fetch supports
     } finally {
       setLoading(false);
     }
@@ -64,23 +64,27 @@ export default function AllSupports(props) {
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
         >
-          <h1 className="text-xl font-bold">All Support Messages</h1>
+          <h1 className="text-xl font-bold">
+            Tous les messages de support {/* All Support Messages */}
+          </h1>
           <span>{isOpen ? "▲" : "▼"}</span>
         </button>
 
         {isOpen && (
           <div className="p-6">
             {loading ? (
-              <p className="text-center">Loading supports...</p>
+              <p className="text-center">
+                Chargement des supports... {/* Loading supports... */}
+              </p>
             ) : error ? (
               <p className="text-center text-red-500">{error}</p>
             ) : (
               <table className="w-full border border-gray-700 rounded-lg overflow-hidden">
                 <thead className="bg-gray-800">
                   <tr>
-                    <th className="p-3 text-left">Subject</th>
+                    <th className="p-3 text-left">Sujet {/* Subject */}</th>
                     <th className="p-3 text-left">Message</th>
-                    <th className="p-3 text-left">Status</th>
+                    <th className="p-3 text-left">Statut {/* Status */}</th>
                     <th className="p-3 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -106,7 +110,7 @@ export default function AllSupports(props) {
                             }
                             className="bg-indigo-600 px-3 py-1 rounded hover:bg-indigo-700"
                           >
-                            {showIcons ? <FaEye /> : "View"}
+                            {showIcons ? <FaEye /> : "Voir"} {/* View */}
                           </button>
 
                           {support.status === "unread" && (
@@ -114,7 +118,11 @@ export default function AllSupports(props) {
                               onClick={() => markAsRead(support._id)}
                               className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
                             >
-                              {showIcons ? <FaCheckCircle /> : "Mark as Read"}
+                              {showIcons ? (
+                                <FaCheckCircle />
+                              ) : (
+                                "Marquer comme lu" /* Mark as Read */
+                              )}
                             </button>
                           )}
                         </td>
@@ -137,7 +145,7 @@ export default function AllSupports(props) {
                 onClick={() => navigate(`/portal/admin/supports`)}
                 className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700"
               >
-                Load More
+                Charger plus {/* Load More */}
               </button>
             </div>
           </div>

@@ -15,34 +15,35 @@ export default function AdminNavbar() {
   return (
     <nav className="bg-gray-900 text-gray-100 px-6 py-6 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo - Admin Panel */}
         <Link to="/portal/admin/dashboard" className="text-xl font-bold text-white">
-          Admin Panel
+          Panneau d’administration
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-6 text-sm">
+          {/* Dashboard */}
           <Link to="/portal/admin/dashboard" className="hover:text-blue-400">
-            Dashboard
+            Tableau de bord
           </Link>
+          {/* Task */}
           <Link to="/portal/admin/task" className="hover:text-blue-400">
-            Task
+            Tâches
           </Link>
+          {/* Groups */}
           <Link to="/portal/admin/groups" className="hover:text-blue-400">
-            Groups
-          </Link>
-          <Link to="/portal/admin/settings" className="hover:text-blue-400">
-            Settings
+            Groupes
           </Link>
         </div>
 
         {/* Desktop Logout */}
         <div className="hidden md:block">
+          {/* Logout */}
           <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
           >
-            Logout
+            Déconnexion
           </button>
         </div>
 
@@ -58,19 +59,20 @@ export default function AdminNavbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-4 mt-6 px-6 pb-4  rounded-lg">
+        <div className="md:hidden flex flex-col gap-4 mt-6 px-6 pb-4 rounded-lg">
+          {/* Dashboard */}
           <Link to="/portal/admin/dashboard" onClick={() => setIsOpen(false)}>
-            Dashboard
+            Tableau de bord
           </Link>
+          {/* Task */}
           <Link to="/portal/admin/task" onClick={() => setIsOpen(false)}>
-            Task
+            Tâches
           </Link>
+          {/* Groups */}
           <Link to="/portal/admin/groups" onClick={() => setIsOpen(false)}>
-            Groups
+            Groupes
           </Link>
-          <Link to="/portal/admin/settings" onClick={() => setIsOpen(false)}>
-            Settings
-          </Link>
+          {/* Logout */}
           <button
             onClick={() => {
               setIsOpen(false);
@@ -78,7 +80,7 @@ export default function AdminNavbar() {
             }}
             className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm mt-2"
           >
-            Logout
+            Déconnexion
           </button>
         </div>
       )}

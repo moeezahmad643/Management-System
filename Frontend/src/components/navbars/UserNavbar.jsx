@@ -17,22 +17,22 @@ export default function UserNavbar() {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo / Title */}
         <Link to="/portal/user/dashboard" className="text-xl font-bold">
-          Guardian App
+          Application Guardian {/* Guardian App */}
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-6 text-sm">
           <Link to="/portal/user/dashboard" className="hover:underline">
-            Dashboard
+            Tableau de bord {/* Dashboard */}
           </Link>
           <Link to="/portal/user/workgroups" className="hover:underline">
-            WorkGroups
+            Groupes de travail {/* WorkGroups */}
           </Link>
           <Link to="/portal/user/profile" className="hover:underline">
-            Profile
+            Profil {/* Profile */}
           </Link>
           <Link to="/portal/user/support" className="hover:underline">
-            Support
+            Support {/* Support */}
           </Link>
         </div>
 
@@ -42,7 +42,7 @@ export default function UserNavbar() {
             onClick={handleLogout}
             className="bg-white text-blue-600 hover:bg-gray-100 px-3 py-1 rounded text-sm"
           >
-            Logout
+            Déconnexion {/* Logout */}
           </button>
         </div>
 
@@ -60,16 +60,16 @@ export default function UserNavbar() {
       {isOpen && (
         <div className="md:hidden flex flex-col gap-4 mt-6  px-6 pb-4  rounded-lg">
           <Link to="/portal/user/dashboard" onClick={() => setIsOpen(false)}>
-            Dashboard
+            Tableau de bord {/* Dashboard */}
           </Link>
-          <Link to="/portal/user/missions" onClick={() => setIsOpen(false)}>
-            Missions
+          <Link to="/portal/user/workgroups" onClick={() => setIsOpen(false)}>
+            Groupes de travail {/* workgroups */}
           </Link>
           <Link to="/portal/user/profile" onClick={() => setIsOpen(false)}>
-            Profile
+            Profil {/* Profile */}
           </Link>
           <Link to="/portal/user/support" onClick={() => setIsOpen(false)}>
-            Support
+            Support {/* Support */}
           </Link>
           <button
             onClick={() => {
@@ -78,7 +78,7 @@ export default function UserNavbar() {
             }}
             className="bg-white text-blue-600 hover:bg-gray-100 px-3 py-1 rounded text-sm mt-2"
           >
-            Logout
+            Déconnexion {/* Logout */}
           </button>
         </div>
       )}

@@ -20,11 +20,11 @@ export default function AllTasks({ limit, moreButton, width }) {
       if (res.ok) {
         setTasks(data); // backend returns array
       } else {
-        setError(data.message || "Failed to fetch tasks");
+        setError(data.message || "Échec du chargement des tâches"); // Failed to fetch tasks
       }
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch tasks");
+      setError("Échec du chargement des tâches");
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,7 @@ export default function AllTasks({ limit, moreButton, width }) {
 
   // Delete task
   const deleteTask = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this task?")) return;
+    if (!window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) return; // Are you sure...
     try {
       const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
         method: "DELETE",
@@ -45,7 +45,7 @@ export default function AllTasks({ limit, moreButton, width }) {
       if (res.ok) {
         fetchTasks();
       } else {
-        alert(data.message || "Error deleting task");
+        alert(data.message || "Erreur lors de la suppression de la tâche"); // Error deleting task
       }
     } catch (err) {
       console.error(err);
@@ -63,7 +63,9 @@ export default function AllTasks({ limit, moreButton, width }) {
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
         >
-          <h1 className="text-xl font-bold max-[500px]:text-lg">All Tasks</h1>
+          <h1 className="text-xl font-bold max-[500px]:text-lg">
+            Toutes les tâches {/* All Tasks */}
+          </h1>
           <span className="max-[500px]:text-sm">{isOpen ? "▲" : "▼"}</span>
         </button>
 
@@ -71,7 +73,7 @@ export default function AllTasks({ limit, moreButton, width }) {
           <div className="p-6 max-[500px]:p-3">
             {loading ? (
               <p className="text-center max-[500px]:text-sm">
-                Loading tasks...
+                Chargement des tâches... {/* Loading tasks... */}
               </p>
             ) : error ? (
               <p className="text-center text-red-500 max-[500px]:text-sm">
@@ -81,8 +83,8 @@ export default function AllTasks({ limit, moreButton, width }) {
               <table className="w-full border border-gray-700 rounded-lg overflow-hidden text-base max-[500px]:text-sm">
                 <thead className="bg-gray-800">
                   <tr>
-                    <th className="p-3 text-left">Title</th>
-                    <th className="p-3 text-left">Status</th>
+                    <th className="p-3 text-left">Titre {/* Title */}</th>
+                    <th className="p-3 text-left">Statut {/* Status */}</th>
                     <th className="p-3 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -101,13 +103,13 @@ export default function AllTasks({ limit, moreButton, width }) {
                             }
                             className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
                           >
-                            {showIcons ? <FaEdit /> : "View/Edit"}
+                            {showIcons ? <FaEdit /> : "Voir/Modifier"} {/* View/Edit */}
                           </button>
                           <button
                             onClick={() => deleteTask(task._id)}
                             className="bg-red-600 px-3 py-1 rounded hover:bg-red-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
                           >
-                            {showIcons ? <FaTrash /> : "Delete"}
+                            {showIcons ? <FaTrash /> : "Supprimer"} {/* Delete */}
                           </button>
                         </td>
                       </tr>
@@ -129,7 +131,7 @@ export default function AllTasks({ limit, moreButton, width }) {
                 onClick={() => navigate(`/portal/admin/tasks`)}
                 className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700 max-[500px]:px-3 max-[500px]:py-1 max-[500px]:text-sm"
               >
-                Load More
+                Charger plus {/* Load More */}
               </button>
             </div>
           </div>

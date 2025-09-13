@@ -7,11 +7,6 @@ export default function Dashboard() {
   const userId = getUser()?._id;
 
   const [user, setUser] = useState({});
-  const [counters, setCounters] = useState({
-    TotalTask: 0,
-    PendingTask: 0,
-    CompletedTask: 0,
-  });
 
   // 🔹 Fetch user profile + counters
   const fetchUser = async () => {
@@ -21,11 +16,6 @@ export default function Dashboard() {
 
       if (res.ok) {
         setUser(data);
-        setCounters({
-          TotalTask: data.TotalTask || 0,
-          PendingTask: data.PendingTask || 0,
-          CompletedTask: data.CompletedTask || 0,
-        });
       } else {
         console.error(data.error || "Failed to fetch user");
       }
@@ -42,8 +32,6 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-900 p-6 text-white space-y-6 max-[500px]:p-2">
       <h1 className="text-3xl font-bold mb-6">Hi {user.name}</h1>
 
-      {/* 🔹 Pass counters to TaskInsights */}
-      <TaskInsights counters={counters} />
 
       {/* 🔹 Pass fetchUser so MyTask can refresh counters when status changes */}
       <MyTask onStatusChange={fetchUser} />

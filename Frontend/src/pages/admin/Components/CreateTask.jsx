@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 
-export default function CreateTask() {
+export default function CreerTache() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    status: "pending",
-    degree: "medium",
+    status: "en_attente",
+    degree: "moyenne",
     assignedTo: [],
     assignedGroup: [],
   });
@@ -18,7 +18,7 @@ export default function CreateTask() {
   const [search, setSearch] = useState("");
   const [expandedRoles, setExpandedRoles] = useState({});
 
-  // 🔹 Fetch users & groups
+  // 🔹 Récupérer utilisateurs & groupes
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,11 +30,10 @@ export default function CreateTask() {
         const userData = await userRes.json();
         const groupData = await groupRes.json();
 
-        setUsers(userData.users || []);   // ✅ fix
-        setGroups(groupData || []); // ✅ fix
-        
+        setUsers(userData.users || []);
+        setGroups(groupData || []);
       } catch (err) {
-        console.error("Error fetching users/groups:", err);
+        console.error("Erreur lors du chargement des utilisateurs/groupes:", err);
       }
     };
     fetchData();
@@ -100,27 +99,27 @@ export default function CreateTask() {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage("✅ Task created successfully!");
+        setMessage("✅ Tâche créée avec succès !");
         setFormData({
           title: "",
           description: "",
-          status: "pending",
-          degree: "medium",
+          status: "en_attente",
+          degree: "moyenne",
           assignedTo: [],
           assignedGroup: [],
         });
       } else {
-        setMessage(data.message || "❌ Failed to create task");
+        setMessage(data.message || "❌ Échec de la création de la tâche");
       }
     } catch (err) {
       console.error(err);
-      setMessage("❌ Server error while creating task");
+      setMessage("❌ Erreur serveur lors de la création de la tâche");
     } finally {
       setLoading(false);
     }
   };
 
-  // 🔹 Quill toolbar
+  // 🔹 Barre d’outils Quill
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -132,17 +131,17 @@ export default function CreateTask() {
   };
   const formats = ["header", "bold", "italic", "underline", "list", "link"];
 
-  // 🔹 Group users by role safely
+  // 🔹 Grouper utilisateurs par rôle
   const groupedUsers = Array.isArray(users)
     ? users.reduce((acc, user) => {
-        const role = user.role || "Others";
+        const role = user.role || "Autres";
         if (!acc[role]) acc[role] = [];
         acc[role].push(user);
         return acc;
       }, {})
     : {};
 
-  // 🔹 Search filter
+  // 🔹 Filtre recherche
   const filteredGroupedUsers = Object.fromEntries(
     Object.entries(groupedUsers).map(([role, roleUsers]) => [
       role,
@@ -156,7 +155,7 @@ export default function CreateTask() {
 
   return (
     <div className="mx-6 p-6 bg-gray-800 text-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-6">Create New Task</h1>
+      <h1 className="text-2xl font-bold mb-6">Créer une nouvelle tâche</h1>
 
       {message && (
         <p
@@ -169,11 +168,11 @@ export default function CreateTask() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Title */}
+        {/* Titre */}
         <input
           type="text"
           name="title"
-          placeholder="Task Title"
+          placeholder="Titre de la tâche"
           value={formData.title}
           onChange={handleChange}
           required
@@ -188,40 +187,42 @@ export default function CreateTask() {
             onChange={handleQuillChange}
             modules={modules}
             formats={formats}
-            placeholder="Write task details here..."
+            placeholder="Écrivez les détails de la tâche ici..."
           />
         </div>
 
-        {/* Status */}
+        {/* Statut */}
         <select
           name="status"
           value={formData.status}
           onChange={handleChange}
           className="w-full p-3 rounded bg-gray-900 border border-gray-600"
         >
-          <option value="pending">⏳ Pending</option>
-          <option value="done">✅ Done</option>
-          <option value="failed">❌ Failed</option>
+          <option value="en_attente">⏳ En attente</option>
+          <option value="terminee">✅ Terminée</option>
+          <option value="echouee">❌ Échouée</option>
         </select>
 
-        {/* Degree */}
+        {/* Degré */}
         <select
           name="degree"
           value={formData.degree}
           onChange={handleChange}
           className="w-full p-3 rounded bg-gray-900 border border-gray-600"
         >
-          <option value="low">🟢 Low</option>
-          <option value="medium">🟡 Medium</option>
-          <option value="high">🔴 High</option>
+          <option value="faible">🟢 Faible</option>
+          <option value="moyenne">🟡 Moyenne</option>
+          <option value="elevee">🔴 Élevée</option>
         </select>
 
-        {/* Assign to Users */}
+        {/* Assigner aux utilisateurs */}
         <div className="bg-gray-900 p-4 rounded border border-gray-600">
-          <label className="block font-semibold mb-2">Assign To Users</label>
+          <label className="block font-semibold mb-2">
+            Assigner aux utilisateurs
+          </label>
           <input
             type="text"
-            placeholder="Search users..."
+            placeholder="Rechercher des utilisateurs..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full mb-4 p-2 rounded bg-gray-800 border border-gray-600 text-white"
@@ -249,7 +250,7 @@ export default function CreateTask() {
                     onClick={() => toggleRole(role, roleUsers)}
                     className="text-sm text-indigo-400 hover:underline mb-2"
                   >
-                    Select All / Deselect All
+                    Tout sélectionner / Tout désélectionner
                   </button>
                   <div className="space-y-2 max-h-40 overflow-y-auto">
                     {roleUsers.map((user) => (
@@ -271,9 +272,9 @@ export default function CreateTask() {
           ))}
         </div>
 
-        {/* Assign to Groups */}
+        {/* Assigner aux groupes */}
         <div className="bg-gray-900 p-4 rounded border border-gray-600">
-          <label className="block font-semibold mb-2">Assign To Groups</label>
+          <label className="block font-semibold mb-2">Assigner aux groupes</label>
           <div className="space-y-2 max-h-40 overflow-y-auto">
             {groups.map((group) => (
               <label key={group._id} className="flex items-center gap-2">
@@ -293,7 +294,7 @@ export default function CreateTask() {
           disabled={loading}
           className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold p-3 rounded transition"
         >
-          {loading ? "Creating..." : "Create Task"}
+          {loading ? "Création en cours..." : "Créer la tâche"}
         </button>
       </form>
     </div>

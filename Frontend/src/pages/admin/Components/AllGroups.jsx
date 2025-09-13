@@ -21,7 +21,7 @@ export default function AllGroups({ limit, moreButton, width }) {
       setGroups(data);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch groups");
+      setError("Échec du chargement des groupes");
     } finally {
       setLoading(false);
     }
@@ -33,7 +33,7 @@ export default function AllGroups({ limit, moreButton, width }) {
 
   // Delete group
   const deleteGroup = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this group?")) return;
+    if (!window.confirm("Êtes-vous sûr de vouloir supprimer ce groupe ?")) return;
     try {
       const res = await fetch(`http://localhost:5000/api/groups/${id}`, {
         method: "DELETE",
@@ -42,7 +42,7 @@ export default function AllGroups({ limit, moreButton, width }) {
       if (res.ok) {
         fetchGroups();
       } else {
-        alert(data.message || "Error deleting group");
+        alert(data.message || "Erreur lors de la suppression du groupe");
       }
     } catch (err) {
       console.error(err);
@@ -62,7 +62,7 @@ export default function AllGroups({ limit, moreButton, width }) {
           className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 hover:bg-gray-700"
         >
           <h1 className="text-xl font-bold max-[500px]:text-lg">
-            All Groups
+            Tous les groupes
           </h1>
           <span className="max-[500px]:text-sm">{isOpen ? "▲" : "▼"}</span>
         </button>
@@ -70,21 +70,23 @@ export default function AllGroups({ limit, moreButton, width }) {
         {isOpen && (
           <div className="p-6 max-[500px]:p-3">
             {loading ? (
-              <p className="text-center max-[500px]:text-sm">Loading groups...</p>
+              <p className="text-center max-[500px]:text-sm">
+                Chargement des groupes...
+              </p>
             ) : error ? (
               <p className="text-center text-red-500 max-[500px]:text-sm">
                 {error}
               </p>
             ) : groups.length === 0 ? (
               <p className="text-center text-gray-400 max-[500px]:text-sm">
-                No groups found.
+                Aucun groupe trouvé.
               </p>
             ) : (
               <table className="w-full border border-gray-700 rounded-lg overflow-hidden text-base max-[500px]:text-sm">
                 <thead className="bg-gray-800">
                   <tr>
-                    <th className="p-3 text-left">Title</th>
-                    <th className="p-3 text-center">Members</th>
+                    <th className="p-3 text-left">Titre</th>
+                    <th className="p-3 text-center">Membres</th>
                     <th className="p-3 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -96,7 +98,7 @@ export default function AllGroups({ limit, moreButton, width }) {
                         key={group._id}
                         className="border-t border-gray-700"
                       >
-                        <td className="p-3 cursor-pointer hover:bg-blue-600"  onClick={()=> navigate("/portal/admin/viewgroup/"+group._id)}>{group.title}</td>
+                        <td className="p-3 cursor-pointer">{group.title}</td>
                         <td className="p-3 text-center">
                           {group.members?.length || 0}
                         </td>
@@ -107,13 +109,13 @@ export default function AllGroups({ limit, moreButton, width }) {
                             }
                             className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
                           >
-                            {showIcons ? <FaEdit /> : "View/Edit"}
+                            {showIcons ? <FaEdit /> : "Voir/Modifier"}
                           </button>
                           <button
                             onClick={() => deleteGroup(group._id)}
                             className="bg-red-600 px-3 py-1 rounded hover:bg-red-700 flex items-center justify-center max-[500px]:px-2 max-[500px]:py-1"
                           >
-                            {showIcons ? <FaTrash /> : "Delete"}
+                            {showIcons ? <FaTrash /> : "Supprimer"}
                           </button>
                         </td>
                       </tr>
@@ -134,7 +136,7 @@ export default function AllGroups({ limit, moreButton, width }) {
                 onClick={() => navigate(`/portal/admin/group`)}
                 className="w-screen bg-indigo-600 px-6 py-2 rounded font-semibold hover:bg-indigo-700 max-[500px]:px-3 max-[500px]:py-1 max-[500px]:text-sm"
               >
-                Load More
+                Charger plus
               </button>
             </div>
           </div>

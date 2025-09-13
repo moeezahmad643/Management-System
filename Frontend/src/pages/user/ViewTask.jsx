@@ -16,14 +16,14 @@ export default function ViewTask() {
         const data = await res.json();
 
         if (!res.ok) {
-          setError(data.message || "Failed to fetch task");
+          setError(data.message || "Échec du chargement de la tâche");
           return;
         }
 
         setTask(data);
       } catch (err) {
         console.error(err);
-        setError("Server error while fetching task");
+        setError("Erreur serveur lors du chargement de la tâche");
       } finally {
         setLoading(false);
       }
@@ -35,14 +35,14 @@ export default function ViewTask() {
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <p>Loading task...</p>
+        <p>Chargement de la tâche...</p>
       </div>
     );
 
   if (error || !task)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <p className="text-red-500">{error || "Task not found"}</p>
+        <p className="text-red-500">{error || "Tâche introuvable"}</p>
       </div>
     );
 
@@ -54,7 +54,7 @@ export default function ViewTask() {
         </h1>
 
         <div className="mb-4 text-white">
-          <h2 className="font-semibold text-white text-lg">Description:</h2>
+          <h2 className="font-semibold text-white text-lg">Description :</h2>
           <div
             className="mt-2 text-gray-300 prose prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: task.description }}
@@ -62,24 +62,24 @@ export default function ViewTask() {
         </div>
 
         <p className="mb-2 text-white">
-          <span className="font-semibold text-white">Status:</span>{" "}
+          <span className="font-semibold text-white">Statut :</span>{" "}
           {task.status.charAt(0).toUpperCase() + task.status.slice(1)}
         </p>
 
         <p className="mb-2">
-          <span className="font-semibold">Degree:</span> {task.degree || "N/A"}
+          <span className="font-semibold">Niveau :</span> {task.degree || "N/A"}
         </p>
 
         {task.assignedTo?.length > 0 && (
           <p className="mb-2">
-            <span className="font-semibold">Assigned To:</span>{" "}
-            You
+            <span className="font-semibold">Assignée à :</span>{" "}
+            Vous
           </p>
         )}
 
         {task.assignedGroup && (
           <p className="mb-4">
-            <span className="font-semibold">Assigned Group:</span>{" "}
+            <span className="font-semibold">Groupe assigné :</span>{" "}
             {typeof task.assignedGroup === "object"
               ? task.assignedGroup.title
               : task.assignedGroup}
@@ -87,17 +87,17 @@ export default function ViewTask() {
         )}
 
         <p className="text-sm text-gray-400">
-          Created At: {new Date(task.createdAt).toLocaleString()}
+          Créée le : {new Date(task.createdAt).toLocaleString("fr-FR")}
         </p>
         <p className="text-sm text-gray-400 mb-4">
-          Last Updated: {new Date(task.updatedAt).toLocaleString()}
+          Dernière mise à jour : {new Date(task.updatedAt).toLocaleString("fr-FR")}
         </p>
 
         <button
           onClick={() => navigate("/portal/user/dashboard")}
           className="bg-blue-600 px-6 py-2 rounded hover:bg-blue-700"
         >
-          Go Back
+          Retour
         </button>
       </div>
     </div>

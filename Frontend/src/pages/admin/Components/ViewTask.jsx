@@ -15,19 +15,19 @@ export default function ViewTask() {
   const [form, setForm] = useState({
     title: "",
     description: "",
-    status: "pending",
+    status: "en-attente",
     assignedTo: [],
     assignedGroup: null,
   });
   const [userInput, setUserInput] = useState("");
 
   const statusOptions = [
-    "pending",
-    "in-progress",
-    "done",
-    "on-hold",
-    "passed",
-    "problem",
+    "en-attente",
+    "en-cours",
+    "terminée",
+    "en-pause",
+    "validée",
+    "problème",
   ];
 
   const modules = {
@@ -40,17 +40,9 @@ export default function ViewTask() {
     ],
   };
 
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "list",
-    "link",
-  ];
+  const formats = ["header", "bold", "italic", "underline", "strike", "list", "link"];
 
-  // Fetch all users
+  // Récupérer les utilisateurs
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -58,29 +50,27 @@ export default function ViewTask() {
         const data = await res.json();
         if (res.ok && Array.isArray(data.users)) setUsers(data.users);
       } catch (err) {
-        console.error("Failed to fetch users:", err);
+        console.error("Échec de récupération des utilisateurs:", err);
       }
     };
     fetchUsers();
   }, []);
 
-  // Fetch all groups
+  // Récupérer les groupes
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const res = await fetch("http://localhost:5000/api/groups");
         const data = await res.json();
-        console.log(data);
-
         if (res.ok && Array.isArray(data)) setGroups(data);
       } catch (err) {
-        console.error("Failed to fetch groups:", err);
+        console.error("Échec de récupération des groupes:", err);
       }
     };
     fetchGroups();
   }, []);
 
-  // Fetch task
+  // Récupérer la tâche
   useEffect(() => {
     const fetchTask = async () => {
       try {
@@ -95,7 +85,7 @@ export default function ViewTask() {
         setForm({
           title: data.title,
           description: data.description,
-          status: data.status || "pending",
+          status: data.status || "en-attente",
           assignedTo: assignedIds,
           assignedGroup:
             Array.isArray(data.assignedGroup) && data.assignedGroup.length > 0
@@ -103,7 +93,7 @@ export default function ViewTask() {
               : null,
         });
       } catch (err) {
-        console.error("Error fetching task:", err);
+        console.error("Erreur lors de la récupération de la tâche:", err);
       } finally {
         setLoading(false);
       }
@@ -123,10 +113,10 @@ export default function ViewTask() {
         setTask(data);
         setIsEditing(false);
       } else {
-        alert(data.message || "Error updating task");
+        alert(data.message || "Erreur lors de la mise à jour de la tâche");
       }
     } catch (err) {
-      console.error("Error updating task:", err);
+      console.error("Erreur lors de la mise à jour de la tâche:", err);
     }
   };
 
@@ -147,7 +137,7 @@ export default function ViewTask() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <h1 className="text-2xl">Loading task...</h1>
+        <h1 className="text-2xl">Chargement de la tâche...</h1>
       </div>
     );
   }
@@ -155,7 +145,7 @@ export default function ViewTask() {
   if (!task) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
-        <h1 className="text-2xl">Task not found</h1>
+        <h1 className="text-2xl">Tâche introuvable</h1>
       </div>
     );
   }
@@ -169,7 +159,7 @@ export default function ViewTask() {
             return user ? user.name : uid;
           })
           .join(", ")
-      : "No users assigned";
+      : "Aucun utilisateur assigné";
 
   const assignedGroupTitle = form.assignedGroup
     ? (() => {
@@ -179,16 +169,16 @@ export default function ViewTask() {
             : form.assignedGroup;
         return groups.find((g) => g._id === gid)?.title || gid;
       })()
-    : "No group assigned";
+    : "Aucun groupe assigné";
 
   return (
     <div className="flex items-center min-h-screen bg-gray-900 text-white p-10">
       <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-4xl mx-auto">
         {isEditing ? (
           <>
-            {/* Title */}
+            {/* Titre */}
             <div className="mb-4">
-              <label className="block font-semibold mb-1">Title</label>
+              <label className="block font-semibold mb-1">Titre</label>
               <input
                 type="text"
                 value={form.title}
@@ -197,7 +187,7 @@ export default function ViewTask() {
               />
             </div>
 
-            {/* Description with Quill */}
+            {/* Description avec Quill */}
             <div className="mb-4">
               <label className="block font-semibold mb-1">Description</label>
               <div className="bg-gray-900 border border-gray-600 rounded text-white quill-dark">
@@ -207,14 +197,14 @@ export default function ViewTask() {
                   onChange={(value) => setForm({ ...form, description: value })}
                   modules={modules}
                   formats={formats}
-                  placeholder="Edit task details..."
+                  placeholder="Modifier les détails de la tâche..."
                 />
               </div>
             </div>
 
-            {/* Status */}
+            {/* Statut */}
             <div className="mb-4">
-              <label className="block font-semibold mb-1">Status</label>
+              <label className="block font-semibold mb-1">Statut</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value })}
@@ -228,14 +218,14 @@ export default function ViewTask() {
               </select>
             </div>
 
-            {/* Assign Users */}
+            {/* Assigner des utilisateurs */}
             <div className="mb-4">
-              <label className="block font-semibold mb-1">Assign Users</label>
+              <label className="block font-semibold mb-1">Assigner des utilisateurs</label>
               <input
                 type="text"
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                placeholder="Type user name or email"
+                placeholder="Tapez un nom ou email"
                 className="w-full px-3 py-2 rounded bg-gray-900 border border-gray-600 text-white"
               />
               {userInput && (
@@ -243,9 +233,7 @@ export default function ViewTask() {
                   {users
                     .filter(
                       (u) =>
-                        u.name
-                          .toLowerCase()
-                          .includes(userInput.toLowerCase()) &&
+                        u.name.toLowerCase().includes(userInput.toLowerCase()) &&
                         !form.assignedTo.includes(u._id)
                     )
                     .map((u) => (
@@ -277,17 +265,15 @@ export default function ViewTask() {
               </div>
             </div>
 
-            {/* Assigned Group */}
+            {/* Groupe assigné */}
             <div className="mb-6">
-              <label className="block font-semibold mb-1">Assigned Group</label>
+              <label className="block font-semibold mb-1">Groupe assigné</label>
               <select
                 value={form.assignedGroup || ""}
-                onChange={(e) =>
-                  setForm({ ...form, assignedGroup: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, assignedGroup: e.target.value })}
                 className="w-full px-3 py-2 rounded bg-gray-900 border border-gray-600 text-white"
               >
-                <option value="">No group assigned</option>
+                <option value="">Aucun groupe assigné</option>
                 {groups.map((g) => (
                   <option key={g._id} value={g._id}>
                     {g.title}
@@ -296,59 +282,57 @@ export default function ViewTask() {
               </select>
             </div>
 
-            {/* Buttons */}
+            {/* Boutons */}
             <div className="flex gap-4">
               <button
                 onClick={saveEdit}
                 className="bg-green-600 px-6 py-2 rounded hover:bg-green-700"
               >
-                Save
+                Enregistrer
               </button>
               <button
                 onClick={() => setIsEditing(false)}
                 className="bg-gray-600 px-6 py-2 rounded hover:bg-gray-700"
               >
-                Cancel
+                Annuler
               </button>
             </div>
           </>
         ) : (
           <>
-            {/* View Mode */}
+            {/* Mode Vue */}
             <p className="mb-4 p-4 bg-gray-900 rounded">
-              <span className="font-bold text-lg">Title:</span> {task.title}
+              <span className="font-bold text-lg">Titre :</span> {task.title}
             </p>
             <div className="mb-4 p-4 bg-gray-900 rounded">
-              <span className="font-bold text-lg">Description:</span>
+              <span className="font-bold text-lg">Description :</span>
               <div
                 className="prose prose-invert max-w-none mt-2 work-section"
                 dangerouslySetInnerHTML={{ __html: task.description }}
               />
             </div>
             <p className="mb-4 p-4 bg-gray-900 rounded">
-              <span className="font-bold text-lg">Status:</span> {task.status}
+              <span className="font-bold text-lg">Statut :</span> {task.status}
             </p>
             <p className="mb-4 p-4 bg-gray-900 rounded">
-              <span className="font-bold text-lg">Assigned To:</span>{" "}
-              {assignedNames}
+              <span className="font-bold text-lg">Assignée à :</span> {assignedNames}
             </p>
             <p className="mb-6 p-4 bg-gray-900 rounded">
-              <span className="font-bold text-lg">Assigned Group:</span>{" "}
-              {assignedGroupTitle || "No group assigned"}
+              <span className="font-bold text-lg">Groupe assigné :</span> {assignedGroupTitle || "Aucun"}
             </p>
 
             <button
               onClick={() => setIsEditing(true)}
               className="bg-yellow-500 px-6 py-2 rounded mr-4 hover:bg-yellow-600"
             >
-              Edit Task
+              Modifier la tâche
             </button>
 
             <button
               onClick={navigate.bind(null, "/portal/admin/dashboard")}
               className="bg-blue-500 px-6 py-2 rounded mr-4 hover:bg-blue-600"
             >
-              Go Back
+              Retour
             </button>
           </>
         )}
